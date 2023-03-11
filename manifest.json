@@ -1,9 +1,4 @@
 {
-  "browser_specific_settings": {
-    "gecko": {
-      "id": "business@wiseai.dev"
-    }
-  },
   "action": {
     "default_title": "Flexify - Accessibility Tool.",
     "default_icon": "images/512.png",
