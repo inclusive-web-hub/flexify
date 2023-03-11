@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="icon" href="img/am.png"> -->
+    <meta charset="utf-8" />
+    <title>Flexify - Accessibility Tool.</title>
+
+    <link rel="stylesheet" type="text/css" href="popup.css" />
+
+    <link
+      href="./lib/bootstrap-5.3.0-alpha1-dist-css-bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      language="javascript"
+      src="./lib/bootstrap-5.3.0-alpha1.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      crossorigin="anonymous"
+    />
+    <script
+      language="javascript"
+      type="module"
+      src="./scripts/popup.js"
+    ></script>
+    <script
+      language="javascript"
+      type="module"
+      src="./scripts/text-to-speech.js"
+    ></script>
+    <script language="javascript" src="./lib/jquery-3.6.3.min.js"></script>
+  </head>
+
+  <body style="display: fixed; overflow: hidden; height: 100%">
+    <header id="header">
+      <img
+        src="./images/logo.png"
+        style="
+          height: 50px;
+          margin-left: 15px;
+          margin-bottom: 20px;
+          margin-right: -25px;
+        "
+      />
+    </header>
+    <div
+      style="
+        overflow: hidden;
+        background-color: black;
+        color: white;
+        overflow-y: scroll;
+        padding-right: 17px;
+        box-sizing: content-box;
+        padding-left: 17px;
+        padding-top: 20px;
+      "
+    >
+      <section id="body" style="height: 410px">
+        <div class="line-top"></div>
+        <div class="mb-3">
+          <h3 style="font-size: 28px">Available Modes</h3>
+        </div>
+
+        <div id="color-blind-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="color-blind-friendly-mode-toggle"
+              class="color-blind-friendly-mode-toggle"
+              name="checkbox"
+              style="margin-left: -20px"
+            />
+            <div class="color-blind-friendly-title-box">
+              <div class="color-blind-friendly-title-profile">
+                <span class="color-blind-icon material-symbols-outlined">
+                  palette </span
+                >Color Blind Friendly
+              </div>
+              <div class="color-blind-friendly-title-short">
+                Shift red and green towards blue.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="dyslexia-friendly-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="dyslexia-friendly-mode-toggle"
+              class="dyslexia-friendly-mode-toggle"
+              name="checkbox"
+              style="margin-left: 24px"
+            />
+            <div class="dyslexia-friendly-title-box">
+              <div class="dyslexia-friendly-title-profile">
+                <span
+                  style="font-size: 30px; margin-right: 13px; margin-left: -5px"
+                  class="dyslexia-icon material-symbols-outlined"
+                >
+                  title </span
+                >Dyslexia Friendly
+              </div>
+              <div class="dyslexia-friendly-title-short">
+                Increase readability and improve visuals.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="visually-impaired-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="visually-impaired-mode-toggle"
+              class="visually-impaired-mode-toggle"
+              name="checkbox"
+              style="margin-left: -43px"
+            />
+            <div class="visually-impaired-title-box">
+              <div class="visually-impaired-title-profile">
+                <span
+                  style="font-size: 30px; margin-right: 5px; margin-left: 0px"
+                  class="sun-icon material-symbols-outlined"
+                >
+                  auto_awesome
+                </span>
+                Visually Impaired
+              </div>
+              <div class="visually-impaired-title-short">
+                Improve website's visuals.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="epilepsy-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="epilepsy-toggle"
+              class="epilepsy-toggle"
+              name="checkbox"
+              style="margin-left: -50px"
+            />
+            <div class="epilepsy-title-box">
+              <div class="epilepsy-title-profile">
+                <span
+                  style="font-size: 30px; margin-right: 10px; margin-left: -1px"
+                  class="brain-icon material-symbols-outlined"
+                >
+                  neurology </span
+                >Epilepsy Safe
+              </div>
+              <div class="epilepsy-title-short">
+                Remove blinking animations.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="cognitive-disability-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="cognitive-disability-mode-toggle"
+              class="cognitive-disability-mode-toggle"
+              name="checkbox"
+              style="margin-left: 5px"
+            />
+            <div class="cognative-title-box">
+              <div class="cognative-title-profile">
+                <span class="square-icon material-symbols-outlined">
+                  space_dashboard
+                </span>
+                Cognitive Disability
+              </div>
+              <div class="cognative-title-short">
+                Help to focus on links, buttons, titles.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="adhd-friendly-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="adhd-friendly-mode-toggle"
+              class="adhd-friendly-mode-toggle"
+              name="checkbox"
+              style="margin-left: 22px"
+            />
+            <div class="adhd-friendly-title-box">
+              <div class="adhd-friendly-title-profile">
+                <span class="focus-icon material-symbols-outlined">
+                  center_focus_strong </span
+                >ADHD Friendly
+              </div>
+              <div class="adhd-friendly-title-short">
+                Reduce distractions and improve focus.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="text-magnifier-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="text-magnifier-mode-toggle"
+              class="text-magnifier-mode-toggle"
+              name="checkbox"
+              style="margin-left: 29px"
+            />
+            <div class="text-magnifier-title-box">
+              <div class="text-magnifier-title-profile">
+                <span class="tip-icon material-symbols-outlined">
+                  tips_and_updates </span
+                >Text Magnifier
+              </div>
+              <div class="text-magnifier-title-short">
+                Help to read small text. Hover over text.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="blind-switch">
+          <span class="coming-soon-text"> Coming Soon! </span>
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="blind-friendly-mode-toggle"
+              class="blind-friendly-mode-toggle"
+              name="checkbox"
+              style="margin-left: -75px"
+            />
+            <div class="blind-friendly-title-box">
+              <div class="blind-friendly-title-profile">
+                <span
+                  style="font-size: 30px"
+                  class="color-blind-icon material-symbols-outlined"
+                >
+                  blind </span
+                >Blind Friendly
+              </div>
+              <div class="blind-friendly-title-short">
+                Turn on text to speech.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="line-1"></div>
+        <h3 style="font-size: 28px">Readability Tools</h3>
+
+        <div class="font-size-container">
+          <p id="font-size-title">
+            <span class="font-size-icon material-symbols-outlined">
+              text_fields </span
+            >Font Size
+          </p>
+          <div class="font-size-buttons-container">
+            <div id="font-size-decrease-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                remove
+              </span>
+            </div>
+            <p id="font-size-indicator"></p>
+            <div id="font-size-increase-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="line-height-container">
+          <p id="line-height-title">
+            <span class="line-height-icon material-symbols-outlined">
+              height </span
+            >Line Height
+          </p>
+          <div class="line-height-buttons-container">
+            <div id="line-height-decrease-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                remove
+              </span>
+            </div>
+            <p id="line-height-indicator"></p>
+            <div id="line-height-increase-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="letter-spacing-container">
+          <p id="letter-spacing-title">
+            <span class="letter-spacing-icon material-symbols-outlined">
+              text_rotation_none </span
+            >Letter Space
+          </p>
+          <div class="letter-spacing-buttons-container">
+            <div id="letter-spacing-decrease-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                remove
+              </span>
+            </div>
+            <p id="letter-spacing-indicator"></p>
+            <div id="letter-spacing-increase-btn">
+              <span
+                style="color: black; font-weight: 800"
+                class="material-symbols-outlined"
+              >
+                add
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="align-box">
+          <label>
+            <input type="radio" name="radio" id="left-align" />
+            <div class="align-left box">
+              <span
+                style="margin-top: -150px; margin-left: -50px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_align_left</span
+              >
+              <span class="align-left-span">Align Left</span>
+            </div>
+          </label>
+
+          <label>
+            <input type="radio" name="radio" id="center-align" />
+            <div class="align-center box">
+              <span
+                style="margin-top: -150px; margin-left: 0px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_align_center</span
+              >
+              <span class="align-center-span">Align Center</span>
+            </div>
+          </label>
+
+          <label>
+            <input type="radio" name="radio" id="right-align" />
+            <div class="align-right box">
+              <span
+                style="margin-top: -150px; margin-left: 40px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_align_right</span
+              >
+              <span class="align-right-span">Align Right</span>
+            </div>
+          </label>
+        </div>
+
+        <div class="line-1"></div>
+        <h3 style="font-size: 28px; margin-bottom: 30px">Visuals Tools</h3>
+
+        <div id="high-contrast-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="high-contrast-mode-toggle"
+              class="high-contrast-mode-toggle"
+              name="checkbox"
+              style="margin-left: -50px"
+            />
+            <div class="high-contrast-title-box">
+              <div class="high-contrast-title-profile">
+                <span class="high-contrast-icon material-symbols-outlined">
+                  light_mode </span
+                >High Contrast
+              </div>
+              <div class="high-contrast-title-short">
+                Turn on high contrast.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="dark-contrast-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="dark-contrast-mode-toggle"
+              class="dark-contrast-mode-toggle"
+              name="checkbox"
+              style="margin-left: -50px"
+            />
+            <div class="dark-contrast-title-box">
+              <div class="dark-contrast-title-profile">
+                <span class="dark-contrast-icon material-symbols-outlined">
+                  dark_mode </span
+                >Dark Contrast
+              </div>
+              <div class="dark-contrast-title-short">
+                Turn on dark contrast.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="monochrome-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="monochrome-mode-toggle"
+              class="monochrome-mode-toggle"
+              name="checkbox"
+              style="margin-left: -54px"
+            />
+            <div class="monochrome-title-box">
+              <div class="monochrome-title-profile">
+                <span class="monochrome-icon material-symbols-outlined">
+                  monochrome_photos </span
+                >Monochrome
+              </div>
+              <div class="monochrome-title-short">Turn on black and white.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="high-saturation-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="high-saturation-mode-toggle"
+              class="high-saturation-mode-toggle"
+              name="checkbox"
+              style="margin-left: -15px"
+            />
+            <div class="high-saturation-title-box">
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  humidity_high </span
+                >High Saturation
+              </div>
+              <div class="high-saturation-title-short">
+                Turn on high saturation mode.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="low-saturation-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="low-saturation-mode-toggle"
+              class="low-saturation-mode-toggle"
+              name="checkbox"
+              style="margin-left: -35px"
+            />
+            <div class="low-saturation-title-box">
+              <div class="low-saturation-title-profile">
+                <span class="low-saturation-icon material-symbols-outlined">
+                  opacity </span
+                >Low Saturation
+              </div>
+              <div class="low-saturation-title-short">
+                Turn on low saturation.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="grey-scale-switch">
+          <div class="toggle-container">
+            <div
+              class="grey-scale-title-box"
+              style="margin-bottom: 35px; margin-left: -12px"
+            >
+              <div class="grey-scale-title-profile">
+                <span class="grey-scale-icon material-symbols-outlined">
+                  contrast </span
+                >Contrast
+              </div>
+            </div>
+            <input
+              id="grey-scale-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="200"
+              value="0"
+            />
+          </div>
+        </div>
+        <div id="saturation-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: 0px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  humidity_high </span
+                >Saturation
+              </div>
+            </div>
+            <input
+              id="saturation-range"
+              class="input-range blue"
+              type="range"
+              min="100"
+              step="5"
+              max="200"
+              value="100"
+            />
+          </div>
+        </div>
+
+        <div id="brightness-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: 0px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  brightness_7 </span
+                >Brightness
+              </div>
+            </div>
+            <input
+              id="brightness-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="200"
+              value="100"
+            />
+          </div>
+        </div>
+
+        <div id="sepia-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: -45px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  image </span
+                >Sepia
+              </div>
+            </div>
+            <input
+              id="sepia-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="100"
+              value="0"
+            />
+          </div>
+        </div>
+
+        <div id="change-text-color-switch">
+          <div
+            class="toggle-container justify-content-center align-items-center"
+          >
+            <h6 class="change-text-color-switch-title">Change Text Color</h6>
+            <div
+              class="ms-3 justify-content-center align-items-center change-text-color-switch-inputs"
+            >
+              <input
+                class="change-text-color-red-input"
+                type="radio"
+                name="text-color"
+                id="text-red"
+                value="red"
+              />
+              <label for="text-red"><span class="red"></span></label>
+
+              <input
+                class="change-text-color-green-input"
+                type="radio"
+                name="text-color"
+                id="text-green"
+              />
+              <label for="text-green"><span class="green"></span></label>
+
+              <input
+                class="change-text-color-yellow-input"
+                type="radio"
+                name="text-color"
+                id="text-yellow"
+              />
+              <label for="text-yellow"><span class="yellow"></span></label>
+
+              <input
+                class="change-text-color-yellow-input"
+                type="radio"
+                name="text-color"
+                id="text-black"
+              />
+              <label for="text-black"><span class="black"></span></label>
+              <input
+                class="change-text-color-yellow-input"
+                type="radio"
+                name="text-color"
+                id="text-white"
+              />
+              <label for="text-white"><span class="white"></span></label>
+
+              <input
+                class="change-text-color-orange-input"
+                type="radio"
+                name="text-color"
+                id="text-orange"
+              />
+              <label for="text-orange"><span class="orange"></span></label>
+
+              <input
+                class="change-text-color-teal-input"
+                type="radio"
+                name="text-color"
+                id="text-teal"
+              />
+              <label for="text-teal"><span class="teal"></span></label>
+
+              <input
+                class="change-text-color-blue-input"
+                type="radio"
+                name="text-color"
+                id="text-blue"
+              />
+              <label for="text-blue"><span class="blue"></span></label>
+
+              <input
+                class="change-text-color-violet-input"
+                type="radio"
+                name="text-color"
+                id="text-violet"
+              />
+              <label for="text-violet"><span class="violet"></span></label>
+
+              <input
+                class="change-text-color-purple-input"
+                type="radio"
+                name="text-color"
+                id="text-purple"
+              />
+              <label for="text-purple"><span class="purple"></span></label>
+
+              <input
+                class="change-text-color-pink-input"
+                type="radio"
+                name="text-color"
+                id="text-pink"
+              />
+              <label for="text-pink"><span class="pink"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <div id="change-background-color-switch">
+          <div
+            class="toggle-container justify-content-center align-items-center"
+          >
+            <h6 class="change-background-color-switch-title">
+              Change Background Color
+            </h6>
+            <div
+              class="ms-3 justify-content-center align-items-center change-background-color-switch-inputs"
+            >
+              <input
+                class="change-background-color-red-input"
+                type="radio"
+                name="background-color"
+                id="background-red"
+                value="red"
+              />
+              <label for="background-red"><span class="red"></span></label>
+
+              <input
+                class="change-background-color-green-input"
+                type="radio"
+                name="background-color"
+                id="background-green"
+              />
+              <label for="background-green"><span class="green"></span></label>
+
+              <input
+                class="change-background-color-yellow-input"
+                type="radio"
+                name="background-color"
+                id="background-yellow"
+              />
+              <label for="background-yellow"
+                ><span class="yellow"></span
+              ></label>
+
+              <input
+                class="change-background-color-black-input"
+                type="radio"
+                name="background-color"
+                id="background-black"
+              />
+              <label for="background-black"><span class="black"></span></label>
+
+              <input
+                class="change-background-color-white-input"
+                type="radio"
+                name="background-color"
+                id="background-white"
+              />
+              <label for="background-white"><span class="white"></span></label>
+
+              <input
+                class="change-background-color-orange-input"
+                type="radio"
+                name="background-color"
+                id="background-orange"
+              />
+              <label for="background-orange"
+                ><span class="orange"></span
+              ></label>
+
+              <input
+                class="change-background-color-teal-input"
+                type="radio"
+                name="background-color"
+                id="background-teal"
+              />
+              <label for="background-teal"><span class="teal"></span></label>
+
+              <input
+                class="change-background-color-blue-input"
+                type="radio"
+                name="background-color"
+                id="background-blue"
+              />
+              <label for="background-blue"><span class="blue"></span></label>
+
+              <input
+                class="change-background-color-violet-input"
+                type="radio"
+                name="background-color"
+                id="background-violet"
+              />
+              <label for="background-violet"
+                ><span class="violet"></span
+              ></label>
+
+              <input
+                class="change-background-color-purple-input"
+                type="radio"
+                name="background-color"
+                id="background-purple"
+              />
+              <label for="background-purple"
+                ><span class="purple"></span
+              ></label>
+
+              <input
+                class="change-background-color-pink-input"
+                type="radio"
+                name="background-color"
+                id="background-pink"
+              />
+              <label for="background-pink"><span class="pink"></span></label>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <footer id="footer" class="pt-4 pb-3">
+      <div class="line-bottom"></div>
+      <p>
+        Find out more
+        <a href="https://flexify-web.netlify.app/" target="_blank">about us</a>.
+      </p>
+    </footer>
+  </body>
+</html>

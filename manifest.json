@@ -1,0 +1,37 @@
+{
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "business@wiseai.dev"
+    }
+  },
+  "action": {
+    "default_title": "Flexify - Accessibility Tool.",
+    "default_icon": "images/512.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "192": "images/192.png",
+    "512": "images/512.png"
+  },
+  "description": "A simple yet powerful A11Y tool that gives you the ultimate freedom to easily customize any web page with a click of a button.",
+  "manifest_version": 3,
+  "name": "Flexify",
+  "permissions": ["tabs", "activeTab", "scripting", "storage"],
+  "short_name": "Flexify",
+  "version": "0.1.0",
+  "web_accessible_resources": [
+    {
+      "resources": ["/scripts/*", "/lib/*", "/data/*"],
+      "matches": ["<all_urls>"],
+      "extension_ids": []
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["/scripts/text-to-speech.js", "/lib/jquery-3.6.3.min.js"]
+    }
+  ]
+}
