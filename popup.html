@@ -483,12 +483,12 @@
           <div class="toggle-container">
             <div
               class="grey-scale-title-box"
-              style="margin-bottom: 35px; margin-left: -12px"
+              style="margin-bottom: 35px; margin-left: 2px"
             >
               <div class="grey-scale-title-profile">
                 <span class="grey-scale-icon material-symbols-outlined">
-                  contrast </span
-                >Contrast
+                  filter_b_and_w </span
+                >Grey Scale
               </div>
             </div>
             <input
@@ -498,6 +498,54 @@
               min="0"
               step="5"
               max="200"
+              value="0"
+            />
+          </div>
+        </div>
+
+        <div id="contrast-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: -12px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  contrast </span
+                >Contrast
+              </div>
+            </div>
+            <input
+              id="contrast-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="200"
+              value="100"
+            />
+          </div>
+        </div>
+
+        <div id="hue-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: 5px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  palette </span
+                >Hue Rotate
+              </div>
+            </div>
+            <input
+              id="hue-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="360"
               value="0"
             />
           </div>
@@ -564,6 +612,30 @@
             </div>
             <input
               id="sepia-range"
+              class="input-range blue"
+              type="range"
+              min="0"
+              step="5"
+              max="100"
+              value="0"
+            />
+          </div>
+        </div>
+
+        <div id="invert-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: -45px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  invert_colors </span
+                >Invert
+              </div>
+            </div>
+            <input
+              id="invert-range"
               class="input-range blue"
               type="range"
               min="0"
@@ -779,6 +851,131 @@
                 id="background-pink"
               />
               <label for="background-pink"><span class="pink"></span></label>
+            </div>
+          </div>
+          <div id="change-title-color-switch">
+            <div
+              class="toggle-container justify-content-center align-items-center"
+            >
+              <h6 class="change-title-color-switch-title">
+                Change Titles Color
+              </h6>
+              <div
+                class="ms-3 justify-content-center align-items-center change-title-color-switch-inputs"
+              >
+                <input
+                  class="change-title-color-red-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-red"
+                  value="red"
+                />
+                <label for="title-red"><span class="red"></span></label>
+
+                <input
+                  class="change-title-color-green-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-green"
+                />
+                <label for="title-green"><span class="green"></span></label>
+
+                <input
+                  class="change-title-color-yellow-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-yellow"
+                />
+                <label for="title-yellow"><span class="yellow"></span></label>
+
+                <input
+                  class="change-title-color-black-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-black"
+                />
+                <label for="title-black"><span class="black"></span></label>
+
+                <input
+                  class="change-title-color-white-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-white"
+                />
+                <label for="title-white"><span class="white"></span></label>
+
+                <input
+                  class="change-title-color-orange-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-orange"
+                />
+                <label for="title-orange"><span class="orange"></span></label>
+
+                <input
+                  class="change-title-color-teal-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-teal"
+                />
+                <label for="title-teal"><span class="teal"></span></label>
+
+                <input
+                  class="change-title-color-blue-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-blue"
+                />
+                <label for="title-blue"><span class="blue"></span></label>
+
+                <input
+                  class="change-title-color-violet-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-violet"
+                />
+                <label for="title-violet"><span class="violet"></span></label>
+
+                <input
+                  class="change-title-color-purple-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-purple"
+                />
+                <label for="title-purple"><span class="purple"></span></label>
+
+                <input
+                  class="change-title-color-pink-input"
+                  type="radio"
+                  name="title-color"
+                  id="title-pink"
+                />
+                <label for="title-pink"><span class="pink"></span></label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="line-1"></div>
+        <h3 style="font-size: 28px; margin-bottom: 30px">Navigation</h3>
+
+        <div id="hide-images-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="hide-images-mode-toggle"
+              class="hide-images-mode-toggle"
+              name="checkbox"
+              style="margin-left: 20px"
+            />
+            <div class="hide-images-title-box">
+              <div class="hide-images-title-profile">
+                <span class="hide-images-icon material-symbols-outlined">
+                  hide_image </span
+                >Hide Images
+              </div>
+              <div class="hide-images-title-short">
+                Hide images from the page.
+              </div>
             </div>
           </div>
         </div>
