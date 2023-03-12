@@ -41,10 +41,23 @@ const storageItems = {
   violetBackgroundButton: false,
   purpleBackgroundButton: false,
   pinkBackgroundButton: false,
+  redTitleButton: false,
+  greenTitleButton: false,
+  yellowTitleButton: false,
+  blackTitleButton: false,
+  whiteTitleButton: false,
+  orangeTitleButton: false,
+  tealTitleButton: false,
+  blueTitleButton: false,
+  violetTitleButton: false,
+  purpleTitleButton: false,
+  pinkTitleButton: false,
+  hideImagesToggle: false,
 };
 
 window.onbeforeunload = (/** @type {any} */ _e) => {
   // TODO:
+
   chrome.runtime.sendMessage({ msg: "page-leave" });
 };
 
@@ -65,6 +78,7 @@ window.onload = async (/** @type {any} */ _e) => {
     magnifyToggle: "toggleTooltip",
     colorBlindToggle: "toggleColorBlindMode",
     dyslexiaFriendlyToggle: "toggleDyslexiaMode",
+    hideImagesToggle: "hideImages",
   };
   storage.get(
     storageItems,
@@ -103,7 +117,9 @@ window.onload = async (/** @type {any} */ _e) => {
   // );
 };
 
-const addPlayButtonOnHighlight = (selection) => {
+const addPlayButtonOnHighlight = (
+  /** @type {Selection | null} */ selection
+) => {
   const range = selection.getRangeAt(0);
   const rect = range.getBoundingClientRect();
   const x = rect.left + window.pageXOffset;
@@ -162,10 +178,12 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   // await executeScriptFunc(textToSpeech.initialize, "");
   textToSpeachPlay?.addEventListener("change", async (e) => {
     // if (textToSpeech.data.player == null) {
+
     if (e.target.checked) {
       textToSpeech.startTextToSpeech(
         "Highlight a piece of text and click play to listen."
       );
+
       document.addEventListener("mouseup", async (e) => {
         const selectedText = window.getSelection().toString();
 
@@ -244,6 +262,7 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   const colorBlindToggle = document.getElementById(
     "color-blind-friendly-mode-toggle"
   );
+  const hideImagesToggle = document.getElementById("hide-images-mode-toggle");
 
   const redTextButton = document.getElementById("text-red");
   const greenTextButton = document.getElementById("text-green");
@@ -269,16 +288,31 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   const purpleBackgroundButton = document.getElementById("background-purple");
   const pinkBackgroundButton = document.getElementById("background-pink");
 
+  const redTitleButton = document.getElementById("title-red");
+  const greenTitleButton = document.getElementById("title-green");
+  const yellowTitleButton = document.getElementById("title-yellow");
+  const blackTitleButton = document.getElementById("title-black");
+  const whiteTitleButton = document.getElementById("title-white");
+  const orangeTitleButton = document.getElementById("title-orange");
+  const tealTitleButton = document.getElementById("title-teal");
+  const blueTitleButton = document.getElementById("title-blue");
+  const violetTitleButton = document.getElementById("title-violet");
+  const purpleTitleButton = document.getElementById("title-purple");
+  const pinkTitleButton = document.getElementById("title-pink");
+
   let inputGreyScaleRange = document.getElementById("grey-scale-range");
   let inputSaturationRange = document.getElementById("saturation-range");
   let inputBrightnessRange = document.getElementById("brightness-range");
   let inputSepiaRange = document.getElementById("sepia-range");
+  let inputContrastRange = document.getElementById("contrast-range");
+  let inputHueRange = document.getElementById("hue-range");
+  let inputInvertRange = document.getElementById("invert-range");
 
   function getSetStorage() {
     storage.get(
       storageItems,
       (
-        /** @type {{ colorBlindToggle: any; epilepsyToggle: any; magnifyToggle: any; cognitiveDisabilityModeToggle: any; adhdFriendlyModeToggle: any; visuallyImpairedToggle: any; highContrastToggle: any; dyslexiaFriendlyToggle: any; darkContrastToggle: any; monochromeModeToggle: any; lowSaturationToggle: any; highSaturationToggle: any; leftAlignButton: any; centerAlignButton: any; rightAlignButton: any; redTextButton: any; greenTextButton: any; yellowTextButton: any; blackTextButton: any; whiteTextButton: any; orangeTextButton: any; tealTextButton: any; blueTextButton: any; violetTextButton: any; purpleTextButton: any; pinkTextButton: any; redBackgroundButton: any; greenBackgroundButton: any; yellowBackgroundButton: any; blackBackgroundButton: any; whiteBackgroundButton: any; orangeBackgroundButton: any; tealBackgroundButton: any; blueBackgroundButton: any; violetBackgroundButton: any; purpleBackgroundButton: any; pinkBackgroundButton: any; }} */ items
+        /** @type {{ colorBlindToggle: any; epilepsyToggle: any; magnifyToggle: any; cognitiveDisabilityModeToggle: any; adhdFriendlyModeToggle: any; visuallyImpairedToggle: any; highContrastToggle: any; dyslexiaFriendlyToggle: any; darkContrastToggle: any; monochromeModeToggle: any; lowSaturationToggle: any; highSaturationToggle: any; hideImagesToggle: any; leftAlignButton: any; centerAlignButton: any; rightAlignButton: any; redTextButton: any; greenTextButton: any; yellowTextButton: any; blackTextButton: any; whiteTextButton: any; orangeTextButton: any; tealTextButton: any; blueTextButton: any; violetTextButton: any; purpleTextButton: any; pinkTextButton: any; redBackgroundButton: any; greenBackgroundButton: any; yellowBackgroundButton: any; blackBackgroundButton: any; whiteBackgroundButton: any; orangeBackgroundButton: any; tealBackgroundButton: any; blueBackgroundButton: any; violetBackgroundButton: any; purpleBackgroundButton: any; pinkBackgroundButton: any; redTitleButton: any; greenTitleButton: any; yellowTitleButton: any; blackTitleButton: any; whiteTitleButton: any; orangeTitleButton: any; tealTitleButton: any; blueTitleButton: any; violetTitleButton: any; purpleTitleButton: any; pinkTitleButton: any; }} */ items
       ) => {
         // for (let key in storageItems) {
         //   console.log(key, window["magnifyToggle"]);
@@ -311,6 +345,8 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         lowSaturationToggle.checked = items.lowSaturationToggle;
 
         highSaturationToggle.checked = items.highSaturationToggle;
+
+        hideImagesToggle.checked = items.hideImagesToggle;
 
         leftAlignButton.checked = items.leftAlignButton;
 
@@ -363,6 +399,30 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         purpleBackgroundButton.checked = items.purpleBackgroundButton;
 
         pinkBackgroundButton.checked = items.pinkBackgroundButton;
+
+        redTitleButton.checked = items.redTitleButton;
+
+        greenTitleButton.checked = items.greenTitleButton;
+
+        yellowTitleButton.checked = items.yellowTitleButton;
+
+        blackTitleButton.checked = items.blackTitleButton;
+
+        whiteTitleButton.checked = items.whiteTitleButton;
+
+        orangeTitleButton.checked = items.orangeTitleButton;
+
+        whiteTitleButton.checked = items.whiteTitleButton;
+
+        tealTitleButton.checked = items.tealTitleButton;
+
+        blueTitleButton.checked = items.blueTitleButton;
+
+        violetTitleButton.checked = items.violetTitleButton;
+
+        purpleTitleButton.checked = items.purpleTitleButton;
+
+        pinkTitleButton.checked = items.pinkTitleButton;
       }
     );
   }
@@ -497,6 +557,102 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
     await executeScriptFunc(setSepiaScale, true, e.target.value);
   });
 
+  inputContrastRange.addEventListener("input", async (e) => {
+    //Change slide thumb color on way up
+
+    if (e.target.value > 20) {
+      inputContrastRange.classList.add("ltpurple");
+    }
+
+    if (e.target.value > 100) {
+      inputContrastRange.classList.add("purple");
+    }
+
+    if (e.target.value > 120) {
+      inputContrastRange.classList.add("pink");
+    }
+
+    //Change slide thumb color on way down
+
+    if (e.target.value < 20) {
+      inputContrastRange.classList.remove("ltpurple");
+    }
+
+    if (e.target.value < 100) {
+      inputContrastRange.classList.remove("purple");
+    }
+
+    if (e.target.value < 120) {
+      inputContrastRange.classList.remove("pink");
+    }
+
+    await executeScriptFunc(setContrastScale, true, e.target.value);
+  });
+
+  inputHueRange.addEventListener("input", async (e) => {
+    //Change slide thumb color on way up
+
+    if (e.target.value > 120) {
+      inputHueRange.classList.add("ltpurple");
+    }
+
+    if (e.target.value > 240) {
+      inputHueRange.classList.add("purple");
+    }
+
+    if (e.target.value > 320) {
+      inputHueRange.classList.add("pink");
+    }
+
+    //Change slide thumb color on way down
+
+    if (e.target.value < 120) {
+      inputHueRange.classList.remove("ltpurple");
+    }
+
+    if (e.target.value < 240) {
+      inputHueRange.classList.remove("purple");
+    }
+
+    if (e.target.value < 320) {
+      inputHueRange.classList.remove("pink");
+    }
+
+    await executeScriptFunc(setHueRotation, true, e.target.value);
+  });
+
+  inputInvertRange.addEventListener("input", async (e) => {
+    //Change slide thumb color on way up
+
+    if (e.target.value > 20) {
+      inputInvertRange.classList.add("ltpurple");
+    }
+
+    if (e.target.value > 60) {
+      inputInvertRange.classList.add("purple");
+    }
+
+    if (e.target.value > 80) {
+      inputInvertRange.classList.add("pink");
+    }
+
+    //Change slide thumb color on way down
+
+    if (e.target.value < 20) {
+      inputInvertRange.classList.remove("ltpurple");
+    }
+
+    if (e.target.value < 60) {
+      inputInvertRange.classList.remove("purple");
+    }
+
+    if (e.target.value < 80) {
+      inputInvertRange.classList.remove("pink");
+    }
+
+    await executeScriptFunc(setInvert, true, e.target.value);
+  });
+
   // TODO: Refactor to a for loop/map
   leftAlignButton?.addEventListener("change", async (e) => {
     storage.set({
@@ -559,6 +715,17 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         });
       }
     );
+  });
+
+  hideImagesToggle?.addEventListener("change", async (e) => {
+    storage.set({
+      hideImagesToggle: e.target.checked,
+    });
+
+    storage.set({
+      rightAlignButton: true,
+    });
+    await executeScriptFunc(hideImages, e.target.checked);
   });
 
   // TODO: Refactor for (let button in [redTextButton, greenTextButton, ...])
@@ -979,6 +1146,205 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
 
     await executeScriptFunc(setBackgroundColor, e.target.checked, "pink");
   });
+  redTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: e.target.checked,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "red");
+  });
+  greenTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+
+      greenTitleButton: e.target.checked,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "green");
+  });
+  yellowTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+
+      yellowTitleButton: e.target.checked,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "yellow");
+  });
+  blackTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+
+      blackTitleButton: e.target.checked,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "black");
+  });
+  whiteTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+
+      whiteTitleButton: e.target.checked,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "white");
+  });
+  orangeTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+
+      orangeTitleButton: e.target.checked,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "orange");
+  });
+  tealTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+
+      tealTitleButton: e.target.checked,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "teal");
+  });
+  blueTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+
+      blueTitleButton: e.target.checked,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "blue");
+  });
+  violetTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+
+      violetTitleButton: e.target.checked,
+      purpleTitleButton: false,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "violet");
+  });
+  purpleTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+
+      purpleTitleButton: e.target.checked,
+      pinkTitleButton: false,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "purple");
+  });
+
+  pinkTitleButton?.addEventListener("change", async (e) => {
+    storage.set({
+      redTitleButton: false,
+      greenTitleButton: false,
+      yellowTitleButton: false,
+      blackTitleButton: false,
+      whiteTitleButton: false,
+      orangeTitleButton: false,
+      tealTitleButton: false,
+      blueTitleButton: false,
+      violetTitleButton: false,
+      purpleTitleButton: false,
+
+      pinkTitleButton: e.target.checked,
+    });
+
+    await executeScriptFunc(setTitleColor, e.target.checked, "pink");
+  });
+
   monochromeModeToggle?.addEventListener("change", function () {
     storage.set({
       monochromeModeToggle: this.checked,
@@ -1576,19 +1942,6 @@ function toggleEpilepsySwitchFunction(on) {
     //     "beforeend",
     //     "<br />Event occurred on checkbox! Type: " + " checkbox state now: "
     //   );
-    document.querySelectorAll("video").forEach((element) => {
-      !1 === element.paused &&
-        (element.pause(), (element.dataset.pausedByReadabler = "true"));
-    });
-    document.querySelectorAll("iframe").forEach((element) => {
-      "undefined" === element.dataset.pausedByReadabler
-        ? (element.dataset.pausedByReadabler = "true")
-        : setTimeout(function () {
-            let t = element.src;
-            t.includes("www.youtube.com/embed") &&
-              ((element.src = t), (element.dataset.pausedByReadabler = "true"));
-          }, 300);
-    });
   } else {
     document.body.classList.remove("no-transition");
   }
@@ -1798,7 +2151,7 @@ function centerAlignMode(on) {
     // Set the new background color
     let style = document.createElement("style");
     style.innerHTML =
-      "body.align-center,body.align-center h1,body.align-center h1 span,body.align-center h2,body.align-center h2 span,body.align-center h3,body.align-center h3 span,body.align-center h4,body.align-center h4 span,body.align-center h5,body.align-center h5 span,body.align-center h6,body.align-center h6 span,\nbody.align-center p,body.align-center li,body.align-center label,body.align-center input,body.align-center select,body.align-center textarea,body.align-center legend,body.align-center code,body.align-center pre,body.align-center dd,body.align-center dt,body.align-center span,body.align-center blockquote {text-align: center !important;}";
+      "body.align-center,body.align-center h1,body.align-center h1 span,body.align-center h2,body.align-center h2 span,body.align-center h3,body.align-center h3 span,body.align-center h4,body.align-center h4 span,body.align-center h5,body.align-center h5 span,body.align-center h6,body.align-center h6 span,body.align-center p,body.align-center li,body.align-center label,body.align-center input,body.align-center select,body.align-center textarea,body.align-center legend,body.align-center code,body.align-center pre,body.align-center dd,body.align-center dt,body.align-center span,body.align-center blockquote {text-align: center !important;}";
     document.getElementsByTagName("head")[0].appendChild(style);
     document.body.classList.add("align-center");
   } else {
@@ -1813,7 +2166,7 @@ function rightAlignMode(on) {
     // Set the new background color
     let style = document.createElement("style");
     style.innerHTML =
-      "body.align-right,body.align-right h1,body.align-right h1 span,body.align-right h2,body.align-right h2 span,body.align-right h3,body.align-right h3 span,body.align-right h4,body.align-right h4 span,body.align-right h5,body.align-right h5 span,body.align-right h6,body.align-right h6 span,\nbody.align-right p,body.align-right li,body.align-right label,body.align-right input,body.align-right select,body.align-right textarea,body.align-right legend,body.align-right code,body.align-right pre,body.align-right dd,body.align-right dt,body.align-right span,body.align-right blockquote {text-align: right !important;}";
+      "body.align-right,body.align-right h1,body.align-right h1 span,body.align-right h2,body.align-right h2 span,body.align-right h3,body.align-right h3 span,body.align-right h4,body.align-right h4 span,body.align-right h5,body.align-right h5 span,body.align-right h6,body.align-right h6 span,body.align-right p,body.align-right li,body.align-right label,body.align-right input,body.align-right select,body.align-right textarea,body.align-right legend,body.align-right code,body.align-right pre,body.align-right dd,body.align-right dt,body.align-right span,body.align-right blockquote {text-align: right !important;}";
     document.getElementsByTagName("head")[0].appendChild(style);
     document.body.classList.add("align-right");
   } else {
@@ -1958,6 +2311,56 @@ function setSepiaScale(on, value) {
 
 /**
  * @param {Boolean} on
+ * @param {any} value
+ */
+function setContrastScale(on, value) {
+  if (on) {
+    // Set the new background color
+    let style = document.createElement("style");
+    style.innerHTML = `body.contrast * { filter: contrast(${value}%) !important; }`;
+
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("contrast");
+  } else {
+    document.body.classList.remove("contrast");
+  }
+}
+
+/**
+ * @param {Boolean} on
+ * @param {any} value
+ */
+function setHueRotation(on, value) {
+  if (on) {
+    // Set the new background color
+    let style = document.createElement("style");
+    style.innerHTML = `body.hue-rotate * { filter: hue-rotate(${value}deg) !important; }`;
+
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("hue-rotate");
+  } else {
+    document.body.classList.remove("hue-rotate");
+  }
+}
+
+/**
+ * @param {Boolean} on
+ * @param {any} value
+ */
+function setInvert(on, value) {
+  if (on) {
+    // Set the new background color
+    let style = document.createElement("style");
+    style.innerHTML = `body.invert * { filter: invert(${value}%) !important; }`;
+
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("invert");
+  } else {
+    document.body.classList.remove("invert");
+  }
+}
+/**
+ * @param {Boolean} on
  */
 function lowSaturation(on) {
   if (on) {
@@ -2006,6 +2409,22 @@ function setBackgroundColor(on, color) {
 }
 
 /**
+ * @param {Boolean} on
+ * @param {String} color
+ */
+function setTitleColor(on, color) {
+  if (on) {
+    let style = document.createElement("style");
+    style.innerHTML = `body.set-title-colors h1,body.set-title-colors h1 *,body.set-title-colors h2,body.set-title-colors h2 *,body.set-title-colors h3,body.set-title-colors h3 *,body.set-title-colors h4,body.set-title-colors h4 *,body.set-title-colors h5,body.set-title-colors h5 *,body.set-title-colors h6,body.set-title-colors h6 * {color: ${color}!important;}`;
+
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("set-title-colors");
+  } else {
+    document.body.classList.remove("set-title-colors");
+  }
+}
+
+/**
  * @param {Boolean} _on
  */
 function highlightElements(_on) {
@@ -2041,6 +2460,20 @@ function toggleColorBlindMode(on) {
   } else {
     // Remove the 'blind' class from the body of the document
     document.body.classList.remove("color-blind");
+  }
+}
+/**
+ * @param {Boolean} on
+ */
+function hideImages(on) {
+  if (on) {
+    let style = document.createElement("style");
+    style.innerHTML =
+      "body.hide-images img, body.hide-images video { opacity: 0 !important; visibility: hidden !important; } body.hide-images * { background-image: none !important; }";
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("hide-images");
+  } else {
+    document.body.classList.remove("hide-images");
   }
 }
 

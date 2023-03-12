@@ -93,6 +93,7 @@ html {
 #dark-contrast-switch,
 #low-saturation-switch,
 #high-saturation-switch,
+#hide-images-switch,
 #grey-scale-switch,
 #monochrome-switch,
 #dyslexia-friendly-switch,
@@ -195,6 +196,7 @@ html {
 .text-magnifier-mode-toggle,
 .high-contrast-mode-toggle,
 .high-saturation-mode-toggle,
+.hide-images-mode-toggle,
 .low-saturation-mode-toggle,
 .monochrome-mode-toggle,
 .dyslexia-friendly-mode-toggle,
@@ -219,6 +221,7 @@ html {
 .text-magnifier-mode-toggle:before,
 .high-contrast-mode-toggle:before,
 .high-saturation-mode-toggle:before,
+.hide-images-mode-toggle:before,
 .low-saturation-mode-toggle:before,
 .monochrome-mode-toggle:before,
 .dyslexia-friendly-mode-toggle:before,
@@ -243,6 +246,7 @@ html {
 .adhd-friendly-mode-toggle:checked,
 .high-contrast-mode-toggle:checked,
 .high-saturation-mode-toggle:checked,
+.hide-images-mode-toggle:checked,
 .low-saturation-mode-toggle:checked,
 .monochrome-mode-toggle:checked,
 .text-magnifier-mode-toggle:checked,
@@ -260,6 +264,7 @@ html {
 .text-magnifier-mode-toggle:checked:before,
 .dark-contrast-mode-toggle:checked:before,
 .high-saturation-mode-toggle:checked:before,
+.hide-images-mode-toggle:checked:before,
 .low-saturation-mode-toggle:checked:before,
 .monochrome-mode-toggle:checked:before,
 .dyslexia-friendly-mode-toggle:checked:before,
@@ -293,6 +298,7 @@ html {
 .text-magnifier-title-box,
 .high-contrast-title-box,
 .high-saturation-title-box,
+.hide-images-title-box,
 .grey-scale-title-box,
 .low-saturation-title-box,
 .monochrome-title-box,
@@ -314,6 +320,7 @@ html {
 .high-saturation-title-profile,
 .low-saturation-title-profile,
 .monochrome-title-profile,
+.hide-images-title-profile,
 .dark-contrast-title-profile,
 .dyslexia-friendly-title-profile,
 .color-blind-friendly-title-profile,
@@ -472,6 +479,7 @@ h3 {
 .letter-spacing-icon,
 .monochrome-icon,
 .high-saturation-icon,
+.hide-images-icon,
 .grey-scale-icon,
 .low-saturation-icon,
 .color-blind-icon {
@@ -594,60 +602,74 @@ h3 {
 }
 
 #change-background-color-switch input[type="radio"],
-#change-text-color-switch input[type="radio"] {
+#change-text-color-switch input[type="radio"],
+#change-title-color-switch input[type="radio"] {
   display: none;
 }
 #change-background-color-switch input[type="radio"]:checked + label span,
-#change-text-color-switch input[type="radio"]:checked + label span {
+#change-text-color-switch input[type="radio"]:checked + label span,
+#change-title-color-switch input[type="radio"]:checked + label span {
   transform: scale(1.25);
 }
 #change-background-color-switch input[type="radio"]:checked + label .red,
-#change-text-color-switch input[type="radio"]:checked + label .red {
+#change-text-color-switch input[type="radio"]:checked + label .red,
+#change-title-color-switch input[type="radio"]:checked + label .red {
   border: 2px solid #711313;
 }
 #change-background-color-switch input[type="radio"]:checked + label .orange,
-#change-text-color-switch input[type="radio"]:checked + label .orange {
+#change-text-color-switch input[type="radio"]:checked + label .orange,
+#change-title-color-switch input[type="radio"]:checked + label .orange {
   border: 2px solid #873a08;
 }
 #change-background-color-switch input[type="radio"]:checked + label .yellow,
-#change-text-color-switch input[type="radio"]:checked + label .yellow {
+#change-text-color-switch input[type="radio"]:checked + label .yellow,
+#change-title-color-switch input[type="radio"]:checked + label .yellow {
   border: 2px solid #816102;
 }
 #change-background-color-switch input[type="radio"]:checked + label .black,
-#change-text-color-switch input[type="radio"]:checked + label .black {
+#change-text-color-switch input[type="radio"]:checked + label .black,
+#change-title-color-switch input[type="radio"]:checked + label .black {
   border: 2px solid #505a0b;
 }
 #change-background-color-switch input[type="radio"]:checked + label .white,
-#change-text-color-switch input[type="radio"]:checked + label .white {
+#change-text-color-switch input[type="radio"]:checked + label .white,
+#change-title-color-switch input[type="radio"]:checked + label .white {
   border: 2px solid #e2eeed;
 }
 #change-background-color-switch input[type="radio"]:checked + label .green,
-#change-text-color-switch input[type="radio"]:checked + label .green {
+#change-text-color-switch input[type="radio"]:checked + label .green,
+#change-title-color-switch input[type="radio"]:checked + label .green {
   border: 2px solid #0e4e1d;
 }
 #change-background-color-switch input[type="radio"]:checked + label .teal,
-#change-text-color-switch input[type="radio"]:checked + label .teal {
+#change-text-color-switch input[type="radio"]:checked + label .teal,
+#change-title-color-switch input[type="radio"]:checked + label .teal {
   border: 2px solid #003633;
 }
 #change-background-color-switch input[type="radio"]:checked + label .blue,
-#change-text-color-switch input[type="radio"]:checked + label .blue {
+#change-text-color-switch input[type="radio"]:checked + label .blue,
+#change-title-color-switch input[type="radio"]:checked + label .blue {
   border: 2px solid #103f62;
 }
 #change-background-color-switch input[type="radio"]:checked + label .violet,
-#change-text-color-switch input[type="radio"]:checked + label .violet {
+#change-text-color-switch input[type="radio"]:checked + label .violet,
+#change-title-color-switch input[type="radio"]:checked + label .violet {
   border: 2px solid #321a64;
 }
 #change-background-color-switch input[type="radio"]:checked + label .purple,
-#change-text-color-switch input[type="radio"]:checked + label .purple {
+#change-text-color-switch input[type="radio"]:checked + label .purple,
+#change-title-color-switch input[type="radio"]:checked + label .purple {
   border: 2px solid #501962;
 }
 #change-background-color-switch input[type="radio"]:checked + label .pink,
-#change-text-color-switch input[type="radio"]:checked + label .pink {
+#change-text-color-switch input[type="radio"]:checked + label .pink,
+#change-title-color-switch input[type="radio"]:checked + label .pink {
   border: 2px solid #851554;
 }
 
 #change-background-color-switch label,
-#change-text-color-switch label {
+#change-text-color-switch label,
+#change-title-color-switch label {
   display: inline-block;
   width: 25px;
   height: 25px;
@@ -660,11 +682,13 @@ h3 {
   text-align: center;
 }
 #change-background-color-switch label:hover span,
-#change-text-color-switch label:hover span {
+#change-text-color-switch label:hover span,
+#change-title-color-switch label:hover span {
   transform: scale(1.25);
 }
 #change-background-color-switch label span,
-#change-text-color-switch label span {
+#change-text-color-switch label span,
+#change-title-color-switch label span {
   display: inline-block;
   cursor: pointer;
   border-radius: 50%;
@@ -678,58 +702,71 @@ h3 {
   transition: transform 0.2s ease-in-out;
 }
 #change-text-color-switch label span.red,
-#change-background-color-switch label span.red {
+#change-background-color-switch label span.red,
+#change-title-color-switch label span.red {
   background: #db2828;
 }
 #change-background-color-switch label span.orange,
-#change-text-color-switch label span.orange {
+#change-text-color-switch label span.orange,
+#change-title-color-switch label span.orange {
   background: #f2711c;
 }
 #change-background-color-switch label span.yellow,
-#change-text-color-switch label span.yellow {
+#change-text-color-switch label span.yellow,
+#change-title-color-switch label span.yellow {
   background: #fbbd08;
 }
 #change-background-color-switch label span.black,
-#change-text-color-switch label span.black {
+#change-text-color-switch label span.black,
+#change-title-color-switch label span.black {
   background: #10100f;
 }
 #change-background-color-switch label span.white,
-#change-text-color-switch label span.white {
+#change-text-color-switch label span.white,
+#change-title-color-switch label span.white {
   background: white;
 }
 #change-background-color-switch label span.green,
-#change-text-color-switch label span.green {
+#change-text-color-switch label span.green,
+#change-title-color-switch label span.green {
   background: #21ba45;
 }
 #change-background-color-switch label span.teal,
-#change-text-color-switch label span.teal {
+#change-text-color-switch label span.teal,
+#change-title-color-switch label span.teal {
   background: #00b5ad;
 }
 #change-background-color-switch label span.blue,
-#change-text-color-switch label span.blue {
+#change-text-color-switch label span.blue,
+#change-title-color-switch label span.blue {
   background: #2185d0;
 }
 #change-background-color-switch label span.violet,
-#change-text-color-switch label span.violet {
+#change-text-color-switch label span.violet,
+#change-title-color-switch label span.violet {
   background: #6435c9;
 }
 #change-background-color-switch label span.purple,
-#change-text-color-switch label span.purple {
+#change-text-color-switch label span.purple,
+#change-title-color-switch label span.purple {
   background: #a333c8;
 }
 #change-background-color-switch label span.pink,
-#change-text-color-switch label span.pink {
+#change-text-color-switch label span.pink,
+#change-title-color-switch label span.pink {
   background: #e03997;
 }
 
 #change-background-color-switch .toggle-container,
-#change-text-color-switch .toggle-container {
+#change-text-color-switch .toggle-container,
+#change-title-color-switch .toggle-container {
   display: flex;
   flex-direction: column;
 }
 
 .change-background-color-switch-title,
-.change-text-color-switch-title {
+.change-text-color-switch-title,
+.change-title-color-switch-title {
   font-size: 18px;
 }
 
