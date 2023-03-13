@@ -53,6 +53,7 @@ const storageItems = {
   purpleTitleButton: false,
   pinkTitleButton: false,
   hideImagesToggle: false,
+  moveImagesToggle: false,
 };
 
 window.onbeforeunload = (/** @type {any} */ _e) => {
@@ -79,6 +80,7 @@ window.onload = async (/** @type {any} */ _e) => {
     colorBlindToggle: "toggleColorBlindMode",
     dyslexiaFriendlyToggle: "toggleDyslexiaMode",
     hideImagesToggle: "hideImages",
+    moveImagesToggle: "toggleMovePictures",
   };
   storage.get(
     storageItems,
@@ -300,13 +302,15 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   const purpleTitleButton = document.getElementById("title-purple");
   const pinkTitleButton = document.getElementById("title-pink");
 
-  let inputGreyScaleRange = document.getElementById("grey-scale-range");
-  let inputSaturationRange = document.getElementById("saturation-range");
-  let inputBrightnessRange = document.getElementById("brightness-range");
-  let inputSepiaRange = document.getElementById("sepia-range");
-  let inputContrastRange = document.getElementById("contrast-range");
-  let inputHueRange = document.getElementById("hue-range");
-  let inputInvertRange = document.getElementById("invert-range");
+  const inputGreyScaleRange = document.getElementById("grey-scale-range");
+  const inputSaturationRange = document.getElementById("saturation-range");
+  const inputBrightnessRange = document.getElementById("brightness-range");
+  const inputSepiaRange = document.getElementById("sepia-range");
+  const inputContrastRange = document.getElementById("contrast-range");
+  const inputHueRange = document.getElementById("hue-range");
+  const inputInvertRange = document.getElementById("invert-range");
+
+  const moveImagesToggle = document.getElementById("move-images-mode-toggle");
 
   function getSetStorage() {
     storage.get(
@@ -423,12 +427,134 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         purpleTitleButton.checked = items.purpleTitleButton;
 
         pinkTitleButton.checked = items.pinkTitleButton;
+
+        // TODO: fix toggle off
+        // moveImagesToggle.checked = items.moveImagesToggle;
       }
     );
   }
 
   getSetStorage();
 
+  // Get all available fonts in the web browser
+  const fonts = [
+    "'Roboto', sans-serif",
+    "'Zilla Slab Highlight', cursive",
+    "'Open Sans', sans-serif",
+    "'Spectral', serif",
+    "'Slabo 27px', serif",
+    "'Lato', sans-serif",
+    "'Roboto Condensed', sans-serif",
+    "'Oswald', sans-serif",
+    "'Source Sans Pro', sans-serif",
+    "'Raleway', sans-serif",
+    "'Zilla Slab', serif",
+    "'Montserrat', sans-serif",
+    "'PT Sans', sans-serif",
+    "'Roboto Slab', serif",
+    "'Merriweather', serif",
+    "'Saira Condensed', sans-serif",
+    "'Saira', sans-serif",
+    "'Open Sans Condensed', sans-serif",
+    "'Saira Semi Condensed', sans-serif",
+    "'Saira Extra Condensed', sans-serif",
+    "'Julee', cursive",
+    "'Archivo', sans-serif",
+    "'Ubuntu', sans-serif",
+    "'Lora', serif",
+    "'Manuale', serif",
+    "'Asap Condensed', sans-serif",
+    "'Faustina', serif",
+    "'Cairo', sans-serif",
+    "'Playfair Display', serif",
+    "'Droid Serif', serif",
+    "'Noto Sans', sans-serif",
+    "'PT Serif', serif",
+    "'Droid Sans', sans-serif",
+    "'Arimo', sans-serif",
+    "'Poppins', sans-serif",
+    "'Sedgwick Ave Display', cursive",
+    "'Titillium Web', sans-serif",
+    "'Muli', sans-serif",
+    "'Sedgwick Ave', cursive",
+    "'Indie Flower', cursive",
+    "'Mada', sans-serif",
+    "'PT Sans Narrow', sans-serif",
+    "'Noto Serif', serif",
+    "'Bitter', serif",
+    "'Dosis', sans-serif",
+    "'Josefin Sans', sans-serif",
+    "'Inconsolata', monospace",
+    "'Bowlby One SC', cursive",
+    "'Oxygen', sans-serif",
+    "'Arvo', serif",
+    "'Hind', sans-serif",
+    "'Cabin', sans-serif",
+    "'Fjalla One', sans-serif",
+    "'Anton', sans-serif",
+    "'Cairo', sans-serif",
+    "'Playfair Display', serif",
+    "'Droid Serif', serif",
+    "'Noto Sans', sans-serif",
+    "'PT Serif', serif",
+    "'Droid Sans', sans-serif",
+    "'Arimo', sans-serif",
+    "'Poppins', sans-serif",
+    "'Sedgwick Ave Display', cursive",
+    "'Titillium Web', sans-serif",
+    "'Muli', sans-serif",
+    "'Sedgwick Ave', cursive",
+    "'Indie Flower', cursive",
+    "'Mada', sans-serif",
+    "'PT Sans Narrow', sans-serif",
+    "'Noto Serif', serif",
+    "'Bitter', serif",
+    "'Dosis', sans-serif",
+    "'Josefin Sans', sans-serif",
+    "'Inconsolata', monospace",
+    "'Bowlby One SC', cursive",
+    "'Oxygen', sans-serif",
+    "'Arvo', serif",
+    "'Hind', sans-serif",
+    "'Cabin', sans-serif",
+    "'Fjalla One', sans-serif",
+    "'Anton', sans-serif",
+    "'Acme', sans-serif",
+    "'Archivo Narrow', sans-serif",
+    "'Mukta Vaani', sans-serif",
+    "'Play', sans-serif",
+    "'Cuprum', sans-serif",
+    "'Maven Pro', sans-serif",
+    "'EB Garamond', serif",
+    "'Passion One', cursive",
+    "'Ropa Sans', sans-serif",
+    "'Francois One', sans-serif",
+    "'Archivo Black', sans-serif",
+    "'Pathway Gothic One', sans-serif",
+    "'Exo', sans-serif",
+    "'Vollkorn', serif",
+    "'Libre Franklin', sans-serif",
+    "'Crete Round', serif",
+    "'Alegreya', serif",
+    "'PT Sans Caption', sans-serif",
+    "'Alegreya Sans', sans-serif",
+    "'Source Code Pro', monospace",
+  ];
+
+  // Create a dropdown list
+  const selectFont = document.getElementById("font-selector");
+
+  // Add font options to the dropdown list
+  for (let i = 0; i < fonts.length; i++) {
+    const option = document.createElement("option");
+    option.text = fonts[i].trim();
+    option.value = fonts[i].trim();
+    selectFont.add(option);
+  }
+
+  selectFont.addEventListener("change", async (e) => {
+    await executeScriptFunc(changeFont, e.target.value);
+  });
   inputSaturationRange.addEventListener("input", async (e) => {
     //Change slide thumb color on way up
 
@@ -1146,6 +1272,9 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
 
     await executeScriptFunc(setBackgroundColor, e.target.checked, "pink");
   });
+
+  // titles colors
+
   redTitleButton?.addEventListener("change", async (e) => {
     storage.set({
       redTitleButton: e.target.checked,
@@ -1343,6 +1472,14 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
     });
 
     await executeScriptFunc(setTitleColor, e.target.checked, "pink");
+  });
+
+  moveImagesToggle?.addEventListener("change", async (e) => {
+    storage.set({
+      moveImagesToggle: e.target.checked,
+    });
+
+    await executeScriptFunc(toggleMovePictures, e.target.checked);
   });
 
   monochromeModeToggle?.addEventListener("change", function () {
@@ -2536,4 +2673,47 @@ function toggleTooltip(on) {
       .getElementsByTagName("body")[0]
       .addEventListener("mouseover", removeTooltip);
   }
+}
+// Function to toggle the picture moving feature
+function toggleMovePictures(on) {
+  // Add event listeners to all the image elements to enable drag and drop functionality
+  if (on) {
+    var images = document.getElementsByTagName("img");
+    for (var i = 0; i < images.length; i++) {
+      images[i].addEventListener("mousedown", function (event) {
+        event.preventDefault();
+        var image = event.target;
+
+        document.addEventListener("mousemove", moveImage);
+        document.addEventListener("mouseup", stopMovingImage);
+
+        function moveImage(event) {
+          var currentX = event.clientX;
+          var currentY = event.clientY;
+          image.style.position = "relative";
+          image.style.zIndex = 99999;
+          image.style.left = currentX - image.width / 1.2 + "px";
+          image.style.top = currentY - image.height / 1.2 + "px";
+        }
+
+        function stopMovingImage(_event) {
+          document.removeEventListener("mousemove", moveImage);
+          document.removeEventListener("mouseup", stopMovingImage);
+        }
+      });
+    }
+  } else {
+    // TODO: remove event listeners.
+    document.removeEventListener("mousemove", moveImage);
+    document.removeEventListener("mouseup", stopMovingImage);
+  }
+}
+
+// Function to change the font of the webpage
+function changeFont(font) {
+  document.body.classList.remove("change-font");
+  let style = document.createElement("style");
+  style.innerHTML = `@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Acme|Alegreya|Alegreya+Sans|Anton|Archivo|Archivo+Black|Archivo+Narrow|Arimo|Arvo|Asap|Asap+Condensed|Bitter|Bowlby+One+SC|Bree+Serif|Cabin|Cairo|Catamaran|Crete+Round|Crimson+Text|Cuprum|Dancing+Script|Dosis|Droid+Sans|Droid+Serif|EB+Garamond|Exo|Exo+2|Faustina|Fira+Sans|Fjalla+One|Francois+One|Gloria+Hallelujah|Hind|Inconsolata|Indie+Flower|Josefin+Sans|Julee|Karla|Lato|Libre+Baskerville|Libre+Franklin|Lobster|Lora|Mada|Manuale|Maven+Pro|Merriweather|Merriweather+Sans|Montserrat|Montserrat+Subrayada|Mukta+Vaani|Muli|Noto+Sans|Noto+Serif|Nunito|Open+Sans|Open+Sans+Condensed:300|Oswald|Oxygen|PT+Sans|PT+Sans+Caption|PT+Sans+Narrow|PT+Serif|Pacifico|Passion+One|Pathway+Gothic+One|Play|Playfair+Display|Poppins|Questrial|Quicksand|Raleway|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab|Ropa+Sans|Rubik|Saira|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Sedgwick+Ave|Sedgwick+Ave+Display|Shadows+Into+Light|Signika|Slabo+27px|Source+Code+Pro|Source+Sans+Pro|Spectral|Titillium+Web|Ubuntu|Ubuntu+Condensed|Varela+Round|Vollkorn|Work+Sans|Yanone+Kaffeesatz|Zilla+Slab|Zilla+Slab+Highlight');body.change-font * { font-family: ${font} !important;}`;
+  document.getElementsByTagName("head")[0].appendChild(style);
+  document.body.classList.add("change-font");
 }
