@@ -94,6 +94,8 @@ html {
 #low-saturation-switch,
 #high-saturation-switch,
 #hide-images-switch,
+#move-images-switch,
+#fonts-switch,
 #grey-scale-switch,
 #monochrome-switch,
 #dyslexia-friendly-switch,
@@ -197,6 +199,7 @@ html {
 .high-contrast-mode-toggle,
 .high-saturation-mode-toggle,
 .hide-images-mode-toggle,
+.move-images-mode-toggle,
 .low-saturation-mode-toggle,
 .monochrome-mode-toggle,
 .dyslexia-friendly-mode-toggle,
@@ -222,6 +225,7 @@ html {
 .high-contrast-mode-toggle:before,
 .high-saturation-mode-toggle:before,
 .hide-images-mode-toggle:before,
+.move-images-mode-toggle:before,
 .low-saturation-mode-toggle:before,
 .monochrome-mode-toggle:before,
 .dyslexia-friendly-mode-toggle:before,
@@ -247,6 +251,7 @@ html {
 .high-contrast-mode-toggle:checked,
 .high-saturation-mode-toggle:checked,
 .hide-images-mode-toggle:checked,
+.move-images-mode-toggle:checked,
 .low-saturation-mode-toggle:checked,
 .monochrome-mode-toggle:checked,
 .text-magnifier-mode-toggle:checked,
@@ -265,6 +270,7 @@ html {
 .dark-contrast-mode-toggle:checked:before,
 .high-saturation-mode-toggle:checked:before,
 .hide-images-mode-toggle:checked:before,
+.move-images-mode-toggle:checked:before,
 .low-saturation-mode-toggle:checked:before,
 .monochrome-mode-toggle:checked:before,
 .dyslexia-friendly-mode-toggle:checked:before,
@@ -299,6 +305,8 @@ html {
 .high-contrast-title-box,
 .high-saturation-title-box,
 .hide-images-title-box,
+.move-images-title-box,
+.fonts-title-box,
 .grey-scale-title-box,
 .low-saturation-title-box,
 .monochrome-title-box,
@@ -321,6 +329,8 @@ html {
 .low-saturation-title-profile,
 .monochrome-title-profile,
 .hide-images-title-profile,
+.move-images-title-profile,
+.fonts-title-profile,
 .dark-contrast-title-profile,
 .dyslexia-friendly-title-profile,
 .color-blind-friendly-title-profile,
@@ -480,8 +490,10 @@ h3 {
 .monochrome-icon,
 .high-saturation-icon,
 .hide-images-icon,
+.move-images-iconfonts-switch,
 .grey-scale-icon,
 .low-saturation-icon,
+.fonts-icon,
 .color-blind-icon {
   font-size: 22px;
   color: rgba(33, 150, 243, 1);
@@ -965,4 +977,43 @@ input[type="range"]::-moz-range-thumb:active {
   color: blue;
   font-weight: 600;
   border-radius: 5px;
+}
+
+select {
+  /* Reset Select */
+  outline: 0;
+  border: 2px solid rgba(33, 150, 243, 1);
+  border-radius: 5px;
+  /* Personalize */
+  flex: 1;
+  padding: 0 1em;
+  color: #fff;
+  background-color: rgb(24, 22, 22);
+  background-image: none;
+  cursor: pointer;
+}
+
+/* Custom Select wrapper */
+#font-selector {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.fonts-container {
+  display: flex;
+  position: relative;
+  margin: 25px 30px 10px 30px;
+  width: 410px;
+  height: 120px;
+  padding-right: 30px;
+  border: 2px solid rgba(33, 150, 243, 1);
+  border-radius: 5px;
+  background-color: rgb(16 18 19);
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
