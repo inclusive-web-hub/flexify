@@ -555,6 +555,57 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   selectFont.addEventListener("change", async (e) => {
     await executeScriptFunc(changeFont, e.target.value);
   });
+
+  // TODO: map cursor text to icons and display icons rather than text
+  const cursors = {
+    auto: "auto",
+    default: "default",
+    none: "none",
+    "context-menu": "context-menu",
+    help: "help",
+    pointer: "pointer",
+    progress: "progress",
+    wait: "wait",
+    cell: "cell",
+    crosshair: "crosshair",
+    text: "text",
+    "vertical-text": "vertical-text",
+    alias: "alias",
+    copy: "copy",
+    move: "move",
+    "no-drop": "no-drop",
+    "not-allowed": "not-allowed",
+    "all-scroll": "all-scroll",
+    "col-resize": "col-resize",
+    "row-resize": "row-resize",
+    "n-resize": "n-resize",
+    "e-resize": "e-resize",
+    "s-resize": "s-resize",
+    "w-resize": "w-resize",
+    "ns-resize": "ns-resize",
+    "ew-resize": "ew-resize",
+    "ne-resize": "ne-resize",
+    "nw-resize": "nw-resize",
+    "se-resize": "se-resize",
+    "sw-resize": "sw-resize",
+    "nesw-resize": "nesw-resize",
+    "nwse-resize": "nwse-resize",
+  };
+
+  // Create a dropdown list
+  const selectCursors = document.getElementById("cursors-selector");
+
+  // Add cursor options to the dropdown list
+  for (const [_key, value] of Object.entries(cursors)) {
+    const option = document.createElement("option");
+    option.text = value;
+    option.value = value;
+    selectCursors.add(option);
+  }
+
+  selectCursors.addEventListener("change", async (e) => {
+    await executeScriptFunc(changeCursor, e.target.value);
+  });
   inputSaturationRange.addEventListener("input", async (e) => {
     //Change slide thumb color on way up
 
@@ -2716,4 +2767,13 @@ function changeFont(font) {
   style.innerHTML = `@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Acme|Alegreya|Alegreya+Sans|Anton|Archivo|Archivo+Black|Archivo+Narrow|Arimo|Arvo|Asap|Asap+Condensed|Bitter|Bowlby+One+SC|Bree+Serif|Cabin|Cairo|Catamaran|Crete+Round|Crimson+Text|Cuprum|Dancing+Script|Dosis|Droid+Sans|Droid+Serif|EB+Garamond|Exo|Exo+2|Faustina|Fira+Sans|Fjalla+One|Francois+One|Gloria+Hallelujah|Hind|Inconsolata|Indie+Flower|Josefin+Sans|Julee|Karla|Lato|Libre+Baskerville|Libre+Franklin|Lobster|Lora|Mada|Manuale|Maven+Pro|Merriweather|Merriweather+Sans|Montserrat|Montserrat+Subrayada|Mukta+Vaani|Muli|Noto+Sans|Noto+Serif|Nunito|Open+Sans|Open+Sans+Condensed:300|Oswald|Oxygen|PT+Sans|PT+Sans+Caption|PT+Sans+Narrow|PT+Serif|Pacifico|Passion+One|Pathway+Gothic+One|Play|Playfair+Display|Poppins|Questrial|Quicksand|Raleway|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab|Ropa+Sans|Rubik|Saira|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Sedgwick+Ave|Sedgwick+Ave+Display|Shadows+Into+Light|Signika|Slabo+27px|Source+Code+Pro|Source+Sans+Pro|Spectral|Titillium+Web|Ubuntu|Ubuntu+Condensed|Varela+Round|Vollkorn|Work+Sans|Yanone+Kaffeesatz|Zilla+Slab|Zilla+Slab+Highlight');body.change-font * { font-family: ${font} !important;}`;
   document.getElementsByTagName("head")[0].appendChild(style);
   document.body.classList.add("change-font");
+}
+
+// Function to change the cursor of the webpage
+function changeCursor(cursor) {
+  document.body.classList.remove("change-cursor");
+  let style = document.createElement("style");
+  style.innerHTML = `body.change-cursor * { cursor: ${cursor} !important;}`;
+  document.getElementsByTagName("head")[0].appendChild(style);
+  document.body.classList.add("change-cursor");
 }
