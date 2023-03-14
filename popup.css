@@ -96,6 +96,7 @@ html {
 #hide-images-switch,
 #move-images-switch,
 #fonts-switch,
+#cursor-switch,
 #grey-scale-switch,
 #monochrome-switch,
 #dyslexia-friendly-switch,
@@ -307,6 +308,7 @@ html {
 .hide-images-title-box,
 .move-images-title-box,
 .fonts-title-box,
+.cursors-title-box,
 .grey-scale-title-box,
 .low-saturation-title-box,
 .monochrome-title-box,
@@ -331,6 +333,7 @@ html {
 .hide-images-title-profile,
 .move-images-title-profile,
 .fonts-title-profile,
+.cursors-title-profile,
 .dark-contrast-title-profile,
 .dyslexia-friendly-title-profile,
 .color-blind-friendly-title-profile,
@@ -490,10 +493,12 @@ h3 {
 .monochrome-icon,
 .high-saturation-icon,
 .hide-images-icon,
-.move-images-iconfonts-switch,
+.move-images-icon,
+.fonts-switch,
 .grey-scale-icon,
 .low-saturation-icon,
 .fonts-icon,
+.cursors-icon,
 .color-blind-icon {
   font-size: 22px;
   color: rgba(33, 150, 243, 1);
@@ -994,7 +999,8 @@ select {
 }
 
 /* Custom Select wrapper */
-#font-selector {
+#font-selector,
+#cursors-selector {
   position: relative;
   display: flex;
   width: 20em;
@@ -1007,6 +1013,21 @@ select {
   display: flex;
   position: relative;
   margin: 25px 30px 10px 30px;
+  width: 410px;
+  height: 120px;
+  padding-right: 30px;
+  border: 2px solid rgba(33, 150, 243, 1);
+  border-radius: 5px;
+  background-color: rgb(16 18 19);
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.cursors-container {
+  display: flex;
+  position: relative;
+  margin: 10px 30px 10px 30px;
   width: 410px;
   height: 120px;
   padding-right: 30px;
