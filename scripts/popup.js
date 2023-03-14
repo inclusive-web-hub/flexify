@@ -1,8 +1,264 @@
 // @ts-nocheck
-import { executeScriptFunc } from "./utils.js";
-import { textToSpeech } from "./text-to-speech.js";
 
-let storage = chrome.storage.local;
+let textToSpeech = {
+  data: {
+    googleTtsLink:
+      "http://translate.google.com/translate_tts?ie=UTF-8" +
+      "&q={{text}}&tl={{lang}}&total={{textparts}}&idx=0&textlen={{textlen}}" +
+      "&client=dict-chrome-ex&prev=input&ttsspeed={{dictation_speed}}",
+    maxTtsLength: 160,
+    isPlaying: false,
+    player: null,
+    languagesData: null,
+    highlightedText: "",
+  },
+  initialize: () => {
+    const url = chrome.runtime.getURL("../data/languages.json");
+    fetch(url)
+      .then((response) => response.json()) // file contains json
+
+      .then((json) => (textToSpeech.data.languagesData = json));
+  },
+  detectLanguage: (
+    /** @type {string} */ text,
+    /** @type {(arg0: any) => void} */ callback
+  ) => {
+    $.ajax({
+      type: "GET",
+      url:
+        "https://translate.googleapis.com/translate_a/single?dt=t&dt=bd&dt=qc&dt=rm&client=gtx&sl=auto&tl=en&q=" +
+        text +
+        "&hl=en-US&dj=1&tk=" +
+        generateToken(text),
+      cache: true,
+      async: true,
+      headers: { "Content-type": "application/json; charset=utf-8" },
+      success: function (responseText) {
+        let lang = responseText.src;
+        callback(lang);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        callback();
+      },
+    });
+  },
+  loadAudio: (
+    /** @type {string | URL} */ link,
+    /** @type {(arg0: string | ArrayBuffer | null) => void} */ on_loaded_callback
+  ) => {
+    $.ajax({
+      type: "GET",
+      url: link,
+      cache: true,
+      xhr: function () {
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = "blob";
+        return xhr;
+      },
+      headers: { "Content-type": "application/json; charset=utf-8" },
+      success: function (responseText) {
+        let blob = new Blob([responseText], { type: "audio/mpeg" });
+        let reader = new FileReader();
+        reader.addEventListener("loadend", function () {
+          on_loaded_callback(reader.result);
+        });
+        reader.readAsDataURL(blob);
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        on_loaded_callback();
+      },
+    });
+  },
+
+  startTextToSpeech: (/** @type {string} */ text) => {
+    textToSpeech.detectLanguage(text, function (/** @type {string} */ lang) {
+      if (textToSpeech.data.languagesData?.indexOf(lang) > -1) {
+        let chunks = generateChunks(text, textToSpeech.data.maxTtsLength);
+        let audios = [];
+
+        let startPlayingChunks = function (/** @type {number} */ i) {
+          if (i >= chunks.length) {
+            textToSpeech.onAudioStopCallback();
+            return;
+          }
+
+          if (!textToSpeech.data.isPlaying) {
+            return;
+          }
+
+          while (i >= audios.length);
+
+          textToSpeech.speak(audios[i], function () {
+            startPlayingChunks(i + 1);
+          });
+        };
+
+        let loadAudios = function (/** @type {string | number} */ i) {
+          if (i >= chunks.length) {
+            return;
+          }
+
+          textToSpeech.loadAudio(
+            textToSpeech.getTextToSpeechLink(chunks[i], lang),
+            function (/** @type {any} */ audio) {
+              audios.push(audio);
+
+              if (i === 0) {
+                textToSpeech.data.isPlaying = true;
+                startPlayingChunks(0);
+              }
+
+              loadAudios(i + 1);
+            }
+          );
+        };
+
+        loadAudios(0);
+      }
+    });
+  },
+  speak: (
+    /** @type {string | undefined} */ audio,
+    /** @type {() => void} */ on_end_callback
+  ) => {
+    textToSpeech.data.player = new Audio(audio);
+
+    textToSpeech.data.player.onerror = function () {};
+
+    textToSpeech.data.player.onended = function () {
+      on_end_callback();
+      textToSpeech.data.player = null;
+    };
+
+    textToSpeech.data.player.play();
+  },
+  getTextToSpeechLink: (
+    /** @type {{ split: (arg0: string) => { (): any; new (): any; length: any; }; length: any; }} */ text,
+    /** @type {any} */ lang
+  ) => {
+    return textToSpeech.data.googleTtsLink
+      .replace("{{text}}", text)
+      .replace("{{lang}}", lang)
+
+      .replace("{{textparts}}", text.split(" ").length)
+
+      .replace("{{textlen}}", text.length)
+      .replace("{{dictation_speed}}", "1.0");
+  },
+  onAudioStopCallback: () => {},
+};
+const executeScriptFunc = async (
+  /** @type {Function} */ func,
+  /** @type {any} */ ...args
+) => {
+  // @ts-ignore
+  await chrome.tabs.query(
+    { active: true, currentWindow: true },
+    (/** @type {{ id: any; }[]} */ tabs) => {
+      // @ts-ignore
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: func,
+        args: [...args],
+      });
+    }
+  );
+};
+const executeScriptFuncSync = (
+  /** @type {Function} */ func,
+  /** @type {any} */ ...args
+) => {
+  // @ts-ignore
+  chrome.tabs.query(
+    { active: true, currentWindow: true },
+    (/** @type {{ id: any; }[]} */ tabs) => {
+      // @ts-ignore
+      chrome.scripting.executeScript({
+        target: { tabId: tabs[0].id },
+        func: func,
+        args: [...args],
+      });
+    }
+  );
+};
+
+/**
+ * @param {string} text
+ * @param {number} max_len
+ */
+const generateChunks = (text, max_len) => {
+  let words = text.split(" ");
+  let chunks = [""];
+
+  for (let i = 0, len = words.length, j = 0; i < len; ++i) {
+    let nw = chunks[j] + " " + words[i];
+
+    if (nw.length < max_len) {
+      chunks[j] = nw.trim();
+    } else {
+      ++j;
+      chunks[j] = words[i];
+    }
+  }
+
+  return chunks;
+};
+
+/**
+ *
+ * @param {number} hash - the initial value of the hash
+ * @param {string | any[]} text - the input string that is used to update the hash.
+ */
+const encrypt = (hash, text) => {
+  for (let i = 0; i < text.length - 2; i += 3) {
+    let charCode = text[i + 2];
+    charCode = "a" <= charCode ? charCode.charCodeAt(0) - 87 : Number(charCode);
+    charCode = "+" == text[i + 1] ? hash >>> charCode : hash << charCode;
+    hash = "+" == text[i] ? (hash + charCode) & 4294967295 : hash ^ charCode;
+  }
+  return hash;
+};
+/**
+ * @param {string} text
+ */
+const generateToken = (text) => {
+  let charCodeList = [];
+
+  for (let i = 0, byteCount = 0; i < text.length; ++i) {
+    let charCode = text.charCodeAt(i);
+
+    if (charCode < 128) {
+      charCodeList[byteCount++] = charCode;
+    } else {
+      if (charCode < 2048) {
+        charCodeList[byteCount++] = (charCode >> 6) | 192;
+      } else {
+        charCodeList[byteCount++] = (charCode >> 12) | 224;
+        charCodeList[byteCount++] = ((charCode >> 6) & 63) | 128;
+      }
+      charCodeList[byteCount++] = (charCode & 63) | 128;
+    }
+  }
+
+  let tokenSum = 0;
+  let tokenFunctionName = 0;
+
+  for (let byteCount = 0; byteCount < charCodeList.length; byteCount++) {
+    tokenSum += charCodeList[byteCount];
+    tokenSum = encrypt(tokenSum, "+-a^+6");
+  }
+
+  tokenSum = encrypt(tokenSum, "+-3^+b+-f");
+
+  if (0 > tokenSum) {
+    tokenSum = (tokenSum & 2147483647) + 2147483648;
+  }
+  tokenSum %= 1e6;
+
+  return tokenSum.toString() + "." + (tokenSum ^ tokenFunctionName).toString();
+};
+
+let storage = chrome.storage?.local;
 const storageItems = {
   leftAlignButton: false,
   centerAlignButton: false,

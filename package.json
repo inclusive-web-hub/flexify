@@ -1,0 +1,40 @@
+{
+  "name": "flexify",
+  "version": "0.1.2",
+  "description": "A simple yet powerful A11Y tool that gives you the ultimate freedom to easily customize any web page with a click of a button.",
+  "main": "scripts/popup.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest --debug --config=jest.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wiseaidev/flexify.git"
+  },
+  "keywords": [
+    "javascript",
+    "chrome-extension",
+    "extension",
+    "firefox-addon",
+    "accessibility",
+    "a11y"
+  ],
+  "author": "wiseaidev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wiseaidev/flexify/issues"
+  },
+  "homepage": "https://github.com/wiseaidev/flexify#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "jsdom": "^21.1.1",
+    "jsdom-global": "^3.0.2",
+    "text-encoding": "^0.7.0"
+  }
+}
