@@ -31,6 +31,11 @@
       type="module"
       src="./scripts/text-to-speech.js"
     ></script>
+    <script
+      language="javascript"
+      type="module"
+      src="./scripts/utils.js"
+    ></script>
     <script language="javascript" src="./lib/jquery-3.6.3.min.js"></script>
   </head>
 
@@ -367,6 +372,19 @@
               <span class="align-right-span">Align Right</span>
             </div>
           </label>
+        </div>
+
+        <div id="fonts-switch">
+          <div class="fonts-container">
+            <div class="fonts-title-box">
+              <div class="fonts-title-profile">
+                <span class="fonts-icon material-symbols-outlined">
+                  font_download </span
+                >Change Font
+              </div>
+              <select id="font-selector"></select>
+            </div>
+          </div>
         </div>
 
         <div class="line-1"></div>
@@ -975,6 +993,28 @@
               </div>
               <div class="hide-images-title-short">
                 Hide images from the page.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="move-images-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="move-images-mode-toggle"
+              class="move-images-mode-toggle"
+              name="checkbox"
+              style="margin-left: 0px"
+            />
+            <div class="move-images-title-box">
+              <div class="move-images-title-profile">
+                <span class="move-images-icon material-symbols-outlined">
+                  drag_click </span
+                >Move Images
+              </div>
+              <div class="move-images-title-short">
+                change images positions.
               </div>
             </div>
           </div>
