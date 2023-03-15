@@ -366,10 +366,10 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         rightAlignButton.checked = items.rightAlignButton;
         justifyAlignButton.checked = items.justifyAlignButton;
         redTextButton.checked = items.redTextButton;
-        boldTextButton = items.boldTextButton;
-        italicTextButton = items.italicTextButton;
-        underlineTextButton = items.underlineTextButton;
-        strikethroughTextButton = items.strikethroughTextButton;
+        boldTextButton.checked = items.boldTextButton;
+        italicTextButton.checked = items.italicTextButton;
+        underlineTextButton.checked = items.underlineTextButton;
+        strikethroughTextButton.checked = items.strikethroughTextButton;
         greenTextButton.checked = items.greenTextButton;
 
         yellowTextButton.checked = items.yellowTextButton;
