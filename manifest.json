@@ -15,7 +15,7 @@
   "name": "Flexify",
   "permissions": ["tabs", "activeTab", "scripting", "storage"],
   "short_name": "Flexify",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "web_accessible_resources": [
     {
       "resources": ["/scripts/*", "/lib/*", "/data/*"],
