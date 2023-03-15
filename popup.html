@@ -331,12 +331,12 @@
           </div>
         </div>
 
-        <div class="align-box">
+        <div class="custom-box align-box">
           <label>
             <input type="radio" name="radio" id="left-align" />
             <div class="align-left box">
               <span
-                style="margin-top: -150px; margin-left: -50px; font-size: 50px"
+                style="margin-top: -160px; margin-left: -80px; font-size: 80px"
                 class="material-symbols-outlined"
                 >format_align_left</span
               >
@@ -348,7 +348,7 @@
             <input type="radio" name="radio" id="center-align" />
             <div class="align-center box">
               <span
-                style="margin-top: -150px; margin-left: 0px; font-size: 50px"
+                style="margin-top: -160px; margin-left: 0px; font-size: 80px"
                 class="material-symbols-outlined"
                 >format_align_center</span
               >
@@ -360,15 +360,70 @@
             <input type="radio" name="radio" id="right-align" />
             <div class="align-right box">
               <span
-                style="margin-top: -150px; margin-left: 40px; font-size: 50px"
+                style="margin-top: -160px; margin-left: 70px; font-size: 80px"
                 class="material-symbols-outlined"
                 >format_align_right</span
               >
               <span class="align-right-span">Align Right</span>
             </div>
           </label>
+          <label>
+            <input type="radio" name="radio" id="justify-align" />
+            <div class="align-justify box">
+              <span
+                style="margin-top: -160px; margin-left: 0px; font-size: 80px"
+                class="material-symbols-outlined"
+                >format_align_justify</span
+              >
+              <span class="align-justify-span">Justified</span>
+            </div>
+          </label>
         </div>
 
+        <div class="custom-box fonts-box">
+          <label>
+            <input type="radio" name="fonts-box" id="bold-text" />
+            <div class="bold-text box">
+              <span
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_bold</span
+              >
+            </div>
+          </label>
+
+          <label>
+            <input type="radio" name="fonts-box" id="italic-text" />
+            <div class="italic-text box">
+              <span
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_italic</span
+              >
+            </div>
+          </label>
+
+          <label>
+            <input type="radio" name="fonts-box" id="underline-text" />
+            <div class="underline-text box">
+              <span
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                class="material-symbols-outlined"
+                >format_underlined</span
+              >
+            </div>
+          </label>
+          <label>
+            <input type="radio" name="fonts-box" id="strikethrough-text" />
+            <div class="strikethrough-text box">
+              <span
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                class="material-symbols-outlined"
+                >strikethrough_s</span
+              >
+            </div>
+          </label>
+        </div>
         <div id="fonts-switch">
           <div class="fonts-container">
             <div class="fonts-title-box">
@@ -378,6 +433,42 @@
                 >Change Font
               </div>
               <select id="font-selector"></select>
+            </div>
+          </div>
+        </div>
+
+        <div id="font-weight-switch">
+          <div class="toggle-container">
+            <div
+              class="high-saturation-title-box"
+              style="margin-bottom: 35px; margin-left: 5px"
+            >
+              <div class="high-saturation-title-profile">
+                <span class="high-saturation-icon material-symbols-outlined">
+                  sort_by_alpha </span
+                >Font Weight
+              </div>
+            </div>
+            <input
+              id="font-weight-range"
+              class="input-range blue"
+              type="range"
+              min="100"
+              step="100"
+              max="900"
+              value="400"
+            />
+          </div>
+        </div>
+        <div id="cursors-switch">
+          <div class="cursors-container">
+            <div class="cursors-title-box">
+              <div class="cursors-title-profile">
+                <span class="cursors-icon material-symbols-outlined">
+                  ads_click </span
+                ><span>Change Cursor</span>
+              </div>
+              <select id="cursors-selector"></select>
             </div>
           </div>
         </div>
