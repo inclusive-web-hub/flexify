@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- <link rel="icon" href="img/am.png"> -->
+    <link rel="icon" href="imgs/am.png" />
     <meta charset="utf-8" />
     <title>Flexify - Accessibility Tool.</title>
 
@@ -21,15 +21,11 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       crossorigin="anonymous"
     />
+    <script language="javascript" type="module" src="./src/popup.js"></script>
     <script
       language="javascript"
       type="module"
-      src="./scripts/popup.js"
-    ></script>
-    <script
-      language="javascript"
-      type="module"
-      src="./scripts/text-to-speech.js"
+      src="./src/textToSpeech.js"
     ></script>
     <script language="javascript" src="./lib/jquery-3.6.3.min.js"></script>
   </head>
@@ -37,7 +33,7 @@
   <body style="display: fixed; overflow: hidden; height: 100%">
     <header id="header">
       <img
-        src="./images/logo.png"
+        src="./imgs/logo.png"
         style="
           height: 50px;
           margin-left: 15px;
@@ -58,10 +54,10 @@
         padding-top: 20px;
       "
     >
-      <section id="body" style="height: 410px">
+      <section id="body" style="height: 410px;">
         <div class="line-top"></div>
         <div class="mb-3">
-          <h3 style="font-size: 28px">Available Modes</h3>
+          <h3 style="font-size: 28px;">Available Modes</h3>
         </div>
 
         <div id="color-blind-switch">
@@ -71,7 +67,7 @@
               id="color-blind-friendly-mode-toggle"
               class="color-blind-friendly-mode-toggle"
               name="checkbox"
-              style="margin-left: -20px"
+              style="margin-left: -20px;"
             />
             <div class="color-blind-friendly-title-box">
               <div class="color-blind-friendly-title-profile">
@@ -93,12 +89,12 @@
               id="dyslexia-friendly-mode-toggle"
               class="dyslexia-friendly-mode-toggle"
               name="checkbox"
-              style="margin-left: 24px"
+              style="margin-left: 24px;"
             />
             <div class="dyslexia-friendly-title-box">
               <div class="dyslexia-friendly-title-profile">
                 <span
-                  style="font-size: 30px; margin-right: 13px; margin-left: -5px"
+                  style="font-size: 30px; margin-right: 13px; margin-left: -5px;"
                   class="dyslexia-icon material-symbols-outlined"
                 >
                   title </span
@@ -117,12 +113,12 @@
               id="visually-impaired-mode-toggle"
               class="visually-impaired-mode-toggle"
               name="checkbox"
-              style="margin-left: -43px"
+              style="margin-left: -43px;"
             />
             <div class="visually-impaired-title-box">
               <div class="visually-impaired-title-profile">
                 <span
-                  style="font-size: 30px; margin-right: 5px; margin-left: 0px"
+                  style="font-size: 30px; margin-right: 5px; margin-left: 0px;"
                   class="sun-icon material-symbols-outlined"
                 >
                   auto_awesome
@@ -142,12 +138,12 @@
               id="epilepsy-toggle"
               class="epilepsy-toggle"
               name="checkbox"
-              style="margin-left: -50px"
+              style="margin-left: -50px;"
             />
             <div class="epilepsy-title-box">
               <div class="epilepsy-title-profile">
                 <span
-                  style="font-size: 30px; margin-right: 10px; margin-left: -1px"
+                  style="font-size: 30px; margin-right: 10px; margin-left: -1px;"
                   class="brain-icon material-symbols-outlined"
                 >
                   neurology </span
@@ -166,7 +162,7 @@
               id="cognitive-disability-mode-toggle"
               class="cognitive-disability-mode-toggle"
               name="checkbox"
-              style="margin-left: 5px"
+              style="margin-left: 5px;"
             />
             <div class="cognative-title-box">
               <div class="cognative-title-profile">
@@ -188,7 +184,7 @@
               id="adhd-friendly-mode-toggle"
               class="adhd-friendly-mode-toggle"
               name="checkbox"
-              style="margin-left: 22px"
+              style="margin-left: 22px;"
             />
             <div class="adhd-friendly-title-box">
               <div class="adhd-friendly-title-profile">
@@ -210,7 +206,7 @@
               id="text-magnifier-mode-toggle"
               class="text-magnifier-mode-toggle"
               name="checkbox"
-              style="margin-left: 29px"
+              style="margin-left: 29px;"
             />
             <div class="text-magnifier-title-box">
               <div class="text-magnifier-title-profile">
@@ -232,12 +228,12 @@
               id="blind-friendly-mode-toggle"
               class="blind-friendly-mode-toggle"
               name="checkbox"
-              style="margin-left: -75px"
+              style="margin-left: -75px;"
             />
             <div class="blind-friendly-title-box">
               <div class="blind-friendly-title-profile">
                 <span
-                  style="font-size: 30px"
+                  style="font-size: 30px;"
                   class="color-blind-icon material-symbols-outlined"
                 >
                   blind </span
@@ -250,7 +246,7 @@
           </div>
         </div>
         <div class="line-1"></div>
-        <h3 style="font-size: 28px">Readability Tools</h3>
+        <h3 style="font-size: 28px;">Readability Tools</h3>
 
         <div class="font-size-container">
           <p id="font-size-title">
@@ -336,7 +332,7 @@
             <input type="radio" name="radio" id="left-align" />
             <div class="align-left box">
               <span
-                style="margin-top: -160px; margin-left: -80px; font-size: 80px"
+                style="margin-top: -160px; margin-left: -80px; font-size: 80px;"
                 class="material-symbols-outlined"
                 >format_align_left</span
               >
@@ -348,7 +344,7 @@
             <input type="radio" name="radio" id="center-align" />
             <div class="align-center box">
               <span
-                style="margin-top: -160px; margin-left: 0px; font-size: 80px"
+                style="margin-top: -160px; margin-left: 0px; font-size: 80px;"
                 class="material-symbols-outlined"
                 >format_align_center</span
               >
@@ -360,7 +356,7 @@
             <input type="radio" name="radio" id="right-align" />
             <div class="align-right box">
               <span
-                style="margin-top: -160px; margin-left: 70px; font-size: 80px"
+                style="margin-top: -160px; margin-left: 70px; font-size: 80px;"
                 class="material-symbols-outlined"
                 >format_align_right</span
               >
@@ -371,7 +367,7 @@
             <input type="radio" name="radio" id="justify-align" />
             <div class="align-justify box">
               <span
-                style="margin-top: -160px; margin-left: 0px; font-size: 80px"
+                style="margin-top: -160px; margin-left: 0px; font-size: 80px;"
                 class="material-symbols-outlined"
                 >format_align_justify</span
               >
@@ -385,7 +381,7 @@
             <input type="radio" name="fonts-box" id="bold-text" />
             <div class="bold-text box">
               <span
-                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px;"
                 class="material-symbols-outlined"
                 >format_bold</span
               >
@@ -396,7 +392,7 @@
             <input type="radio" name="fonts-box" id="italic-text" />
             <div class="italic-text box">
               <span
-                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px;"
                 class="material-symbols-outlined"
                 >format_italic</span
               >
@@ -407,7 +403,7 @@
             <input type="radio" name="fonts-box" id="underline-text" />
             <div class="underline-text box">
               <span
-                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px;"
                 class="material-symbols-outlined"
                 >format_underlined</span
               >
@@ -417,7 +413,7 @@
             <input type="radio" name="fonts-box" id="strikethrough-text" />
             <div class="strikethrough-text box">
               <span
-                style="margin-top: -140px; margin-left: 0px; font-size: 50px"
+                style="margin-top: -140px; margin-left: 0px; font-size: 50px;"
                 class="material-symbols-outlined"
                 >strikethrough_s</span
               >
@@ -441,7 +437,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: 5px"
+              style="margin-bottom: 35px; margin-left: 5px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -474,7 +470,7 @@
         </div>
 
         <div class="line-1"></div>
-        <h3 style="font-size: 28px; margin-bottom: 30px">Visuals Tools</h3>
+        <h3 style="font-size: 28px; margin-bottom: 30px;">Visuals Tools</h3>
 
         <div id="high-contrast-switch">
           <div class="toggle-container">
@@ -483,7 +479,7 @@
               id="high-contrast-mode-toggle"
               class="high-contrast-mode-toggle"
               name="checkbox"
-              style="margin-left: -50px"
+              style="margin-left: -50px;"
             />
             <div class="high-contrast-title-box">
               <div class="high-contrast-title-profile">
@@ -505,7 +501,7 @@
               id="dark-contrast-mode-toggle"
               class="dark-contrast-mode-toggle"
               name="checkbox"
-              style="margin-left: -50px"
+              style="margin-left: -50px;"
             />
             <div class="dark-contrast-title-box">
               <div class="dark-contrast-title-profile">
@@ -527,7 +523,7 @@
               id="monochrome-mode-toggle"
               class="monochrome-mode-toggle"
               name="checkbox"
-              style="margin-left: -54px"
+              style="margin-left: -54px;"
             />
             <div class="monochrome-title-box">
               <div class="monochrome-title-profile">
@@ -547,7 +543,7 @@
               id="high-saturation-mode-toggle"
               class="high-saturation-mode-toggle"
               name="checkbox"
-              style="margin-left: -15px"
+              style="margin-left: -15px;"
             />
             <div class="high-saturation-title-box">
               <div class="high-saturation-title-profile">
@@ -568,7 +564,7 @@
               id="low-saturation-mode-toggle"
               class="low-saturation-mode-toggle"
               name="checkbox"
-              style="margin-left: -35px"
+              style="margin-left: -35px;"
             />
             <div class="low-saturation-title-box">
               <div class="low-saturation-title-profile">
@@ -587,7 +583,7 @@
           <div class="toggle-container">
             <div
               class="grey-scale-title-box"
-              style="margin-bottom: 35px; margin-left: 2px"
+              style="margin-bottom: 35px; margin-left: 2px;"
             >
               <div class="grey-scale-title-profile">
                 <span class="grey-scale-icon material-symbols-outlined">
@@ -611,7 +607,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: -12px"
+              style="margin-bottom: 35px; margin-left: -12px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -635,7 +631,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: 5px"
+              style="margin-bottom: 35px; margin-left: 5px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -658,7 +654,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: 0px"
+              style="margin-bottom: 35px; margin-left: 0px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -682,7 +678,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: 0px"
+              style="margin-bottom: 35px; margin-left: 0px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -706,7 +702,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: -45px"
+              style="margin-bottom: 35px; margin-left: -45px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -730,7 +726,7 @@
           <div class="toggle-container">
             <div
               class="high-saturation-title-box"
-              style="margin-bottom: 35px; margin-left: -45px"
+              style="margin-bottom: 35px; margin-left: -45px;"
             >
               <div class="high-saturation-title-profile">
                 <span class="high-saturation-icon material-symbols-outlined">
@@ -1060,7 +1056,7 @@
           </div>
         </div>
         <div class="line-1"></div>
-        <h3 style="font-size: 28px; margin-bottom: 30px">Navigation</h3>
+        <h3 style="font-size: 28px; margin-bottom: 30px;">Navigation</h3>
 
         <div id="hide-images-switch">
           <div class="toggle-container">
@@ -1069,7 +1065,7 @@
               id="hide-images-mode-toggle"
               class="hide-images-mode-toggle"
               name="checkbox"
-              style="margin-left: 20px"
+              style="margin-left: 20px;"
             />
             <div class="hide-images-title-box">
               <div class="hide-images-title-profile">
@@ -1091,7 +1087,7 @@
               id="move-images-mode-toggle"
               class="move-images-mode-toggle"
               name="checkbox"
-              style="margin-left: 0px"
+              style="margin-left: 0px;"
             />
             <div class="move-images-title-box">
               <div class="move-images-title-profile">
@@ -1100,7 +1096,64 @@
                 >Move Images
               </div>
               <div class="move-images-title-short">
-                change images positions.
+                Change images positions.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="big-white-cursor-switch">
+          <span class="coming-soon-text"> Coming Soon! </span>
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="big-white-cursor-toggle"
+              class="big-white-cursor-toggle"
+              name="checkbox"
+              style="margin-left: 10px;"
+            />
+            <div class="big-white-cursor-title-box">
+              <div class="big-white-cursor-title-profile">
+                <img
+                  src="./imgs/normal.cur"
+                  style="
+                    height: 30px;
+                    margin-left: 0px;
+                    margin-bottom: 10px;
+                    margin-right: 10px;
+                  "
+                />Big White Cursor
+              </div>
+              <div class="big-white-cursor-title-short">
+                Change the default cursor.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="big-black-cursor-switch">
+          <div class="toggle-container">
+            <input
+              type="checkbox"
+              id="big-black-cursor-toggle"
+              class="big-black-cursor-toggle"
+              name="checkbox"
+              style="margin-left: 10px;"
+            />
+            <div class="big-black-cursor-title-box">
+              <div class="big-black-cursor-title-profile">
+                <img
+                  src="./imgs/link.cur"
+                  style="
+                    height: 30px;
+                    margin-left: 0px;
+                    margin-bottom: 10px;
+                    margin-right: 10px;
+                  "
+                />Big Black Cursor
+              </div>
+              <div class="big-black-cursor-title-short">
+                Change the default cursor.
               </div>
             </div>
           </div>

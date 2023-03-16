@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { executeScriptFunc } from "./utils.js";
-import { textToSpeech } from "./text-to-speech.js";
+import { textToSpeech } from "./textToSpeech.js";
 
 let storage = chrome.storage.local;
 const storageItems = {
@@ -54,6 +54,8 @@ const storageItems = {
   pinkTitleButton: false,
   hideImagesToggle: false,
   moveImagesToggle: false,
+  bigWhiteCursorToggle: false,
+  bigBlackCursorToggle: false,
 };
 
 window.onbeforeunload = (/** @type {any} */ _e) => {
@@ -64,60 +66,62 @@ window.onbeforeunload = (/** @type {any} */ _e) => {
 
 window.onload = async (/** @type {any} */ _e) => {
   const toggleFunctions = {
-    leftAlignButton: "leftAlignMode",
-    centerAlignButton: "centerAlignMode",
-    rightAlignButton: "rightAlignMode",
-    monochromeModeToggle: "monochromeMode",
-    highContrastToggle: "highContrast",
-    darkContrastToggle: "darkContrast",
-    highSaturationToggle: "highSaturation",
-    lowSaturationToggle: "lowSaturation",
-    visuallyImpairedToggle: "adjustColors",
-    epilepsyToggle: "toggleEpilepsySwitchFunction",
-    cognitiveDisabilityModeToggle: "highlightElements",
-    adhdFriendlyModeToggle: "toggleAdhdMode",
-    magnifyToggle: "toggleTooltip",
-    colorBlindToggle: "toggleColorBlindMode",
-    dyslexiaFriendlyToggle: "toggleDyslexiaMode",
-    hideImagesToggle: "hideImages",
-    moveImagesToggle: "toggleMovePictures",
+    leftAlignButton: leftAlignMode,
+    centerAlignButton: centerAlignMode,
+    rightAlignButton: rightAlignMode,
+    monochromeModeToggle: monochromeMode,
+    highContrastToggle: highContrast,
+    darkContrastToggle: darkContrast,
+    highSaturationToggle: highSaturation,
+    lowSaturationToggle: lowSaturation,
+    visuallyImpairedToggle: adjustColors,
+    epilepsyToggle: toggleEpilepsySwitchFunction,
+    cognitiveDisabilityModeToggle: highlightElements,
+    adhdFriendlyModeToggle: toggleAdhdMode,
+    magnifyToggle: toggleTooltip,
+    colorBlindToggle: toggleColorBlindMode,
+    dyslexiaFriendlyToggle: toggleDyslexiaMode,
+    hideImagesToggle: hideImages,
+    moveImagesToggle: toggleMovePictures,
+    bigBlackCursorToggle: bigBlackCursor,
+    bigWhiteCursorToggle: bigWhiteCursor,
   };
   storage.get(
     storageItems,
     async (/** @type {{ [x: string]: any; }} */ items) => {
       for (let key in items) {
-        if (items[key]) {
-          await executeScriptFunc(window[toggleFunctions[key]], true);
+        if (items[key] && toggleFunctions[key]) {
+          await executeScriptFunc(toggleFunctions[key], true);
         }
       }
     }
   );
-
-  // const textColors = {
-  //   redTextButton: "red",
-  //   greenTextButton: "green",
-  //   yellowTextButton: "yellow",
-  //   blackTextButton: "black",
-  //   whiteTextButton: "white",
-  //   orangeTextButton: "orange",
-  //   tealTextButton: "teal",
-  //   blueTextButton: "blue",
-  //   violetTextButton: "violet",
-  //   purpleTextButton: "purple",
-  //   pinkTextButton: "pink",
-  // };
-  // storage.get(
-  //   storageItems,
-  //   async (/** @type {{ [x: string]: any; }} */ items) => {
-  //     for (let key in items) {
-  //       if (items[key]) {
-  //
-  //         await executeScriptFunc(setTextColor, true, textColors[key]);
-  //       }
-  //     }
-  //   }
-  // );
 };
+
+// const textColors = {
+//   redTextButton: "red",
+//   greenTextButton: "green",
+//   yellowTextButton: "yellow",
+//   blackTextButton: "black",
+//   whiteTextButton: "white",
+//   orangeTextButton: "orange",
+//   tealTextButton: "teal",
+//   blueTextButton: "blue",
+//   violetTextButton: "violet",
+//   purpleTextButton: "purple",
+//   pinkTextButton: "pink",
+// };
+// storage.get(
+//   storageItems,
+//   async (/** @type {{ [x: string]: any; }} */ items) => {
+//     for (let key in items) {
+//       if (items[key]) {
+//
+//         await executeScriptFunc(setTextColor, true, textColors[key]);
+//       }
+//     }
+//   }
+// );
 
 const addPlayButtonOnHighlight = (
   /** @type {Selection | null} */ selection
@@ -318,7 +322,12 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
   const fontWeightRange = document.getElementById("font-weight-range");
 
   const moveImagesToggle = document.getElementById("move-images-mode-toggle");
-
+  const bigWhiteCursorToggle = document.getElementById(
+    "big-white-cursor-toggle"
+  );
+  const bigBlackCursorToggle = document.getElementById(
+    "big-black-cursor-toggle"
+  );
   function getSetStorage() {
     storage.get(
       storageItems,
@@ -364,13 +373,24 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
         centerAlignButton.checked = items.centerAlignButton;
 
         rightAlignButton.checked = items.rightAlignButton;
+
         justifyAlignButton.checked = items.justifyAlignButton;
+
         redTextButton.checked = items.redTextButton;
+
         boldTextButton.checked = items.boldTextButton;
+
         italicTextButton.checked = items.italicTextButton;
+
         underlineTextButton.checked = items.underlineTextButton;
+
         strikethroughTextButton.checked = items.strikethroughTextButton;
+
         greenTextButton.checked = items.greenTextButton;
+
+        bigWhiteCursorToggle.checked = items.bigWhiteCursorToggle;
+
+        bigBlackCursorToggle.checked = items.bigBlackCursorToggle;
 
         yellowTextButton.checked = items.yellowTextButton;
 
@@ -1657,13 +1677,27 @@ document.addEventListener("DOMContentLoaded", async (_e) => {
 
     await executeScriptFunc(setTitleColor, e.target.checked, "pink");
   });
-
   moveImagesToggle?.addEventListener("change", async (e) => {
     storage.set({
       moveImagesToggle: e.target.checked,
     });
 
     await executeScriptFunc(toggleMovePictures, e.target.checked);
+  });
+  bigWhiteCursorToggle?.addEventListener("change", async (e) => {
+    storage.set({
+      bigWhiteCursorToggle: e.target.checked,
+    });
+
+    await executeScriptFunc(bigWhiteCursor, e.target.checked);
+  });
+
+  bigBlackCursorToggle?.addEventListener("change", async (e) => {
+    storage.set({
+      bigBlackCursorToggle: e.target.checked,
+    });
+
+    await executeScriptFunc(bigBlackCursor, e.target.checked);
   });
 
   monochromeModeToggle?.addEventListener("change", function () {
@@ -3023,4 +3057,28 @@ function changeCursor(cursor) {
   style.innerHTML = `body.change-cursor * { cursor: ${cursor} !important;}`;
   document.getElementsByTagName("head")[0].appendChild(style);
   document.body.classList.add("change-cursor");
+}
+
+function bigWhiteCursor(on) {
+  if (on) {
+    let style = document.createElement("style");
+    style.innerHTML =
+      "body.big-white-cursor * { cursor: url('../imgs/normal.cur') 25 15, auto;}";
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("big-white-cursor");
+  } else {
+    document.body.classList.remove("big-white-cursor");
+  }
+}
+
+function bigBlackCursor(on) {
+  if (on) {
+    let style = document.createElement("style");
+    style.innerHTML =
+      "body.big-black-cursor * { cursor: url('../imgs/link.cur') 25 15, auto;}";
+    document.getElementsByTagName("head")[0].appendChild(style);
+    document.body.classList.add("big-black-cursor");
+  } else {
+    document.body.classList.remove("big-black-cursor");
+  }
 }
