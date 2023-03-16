@@ -1,4 +1,4 @@
-import { textToSpeech } from "./text-to-speech.js";
+import { textToSpeech } from "./textToSpeech.js";
 import { executeScriptFuncSync } from "./utils.js";
 
 const addPlayButtonOnHighlight = (selection) => {
