@@ -84,26 +84,7 @@ html {
   margin-right: 10px;
   margin-bottom: 10px;
 }
-#epilepsy-switch,
-#visually-impaired-switch,
-#cognitive-disability-switch,
-#adhd-friendly-switch,
-#text-magnifier-switch,
-#high-contrast-switch,
-#dark-contrast-switch,
-#low-saturation-switch,
-#high-saturation-switch,
-#hide-images-switch,
-#move-images-switch,
-#big-white-cursor-switch,
-#big-black-cursor-switch,
-#fonts-switch,
-#cursor-switch,
-#grey-scale-switch,
-#monochrome-switch,
-#dyslexia-friendly-switch,
-#color-blind-friendly-switch,
-#blind-friendly-switch {
+#common-switch {
   font-size: 20px;
   color: #fff;
   margin-right: 10px;
